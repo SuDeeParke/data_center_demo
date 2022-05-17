@@ -4,6 +4,7 @@
 
 <script>
 import Basic from '@/libs/Basic';
+import Building from '@/libs/Building';
 
 export default {
   name: 'Scene',
@@ -12,6 +13,7 @@ export default {
     DataCenter.init('scene').then(() => {
       DataCenter.addModle('models/data_center_full/JiFang.gltf', 'gltf');
     });
+    new Building().init(DataCenter.scene, 'models/office_building/scene.gltf');
     DataCenter.render();
 
     //  window.addEventListener('resize', () => { Tools.onWindowResize(this.basicScene); });

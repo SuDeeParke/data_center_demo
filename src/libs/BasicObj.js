@@ -1,6 +1,21 @@
 import { SkeletonHelper } from 'three';
+import Tools from './Tools';
 
 export default class BasicObj {
+  constructor() {
+    this.obj3d = null;
+    this.parentLevel = null;
+    this.subLevel = [];
+    this.pickable = false;
+  }
+
+  init = async (scene, addr) => {
+    await Tools.loadGltfModle(addr).then((res) => {
+      this.obj3d = res;
+      scene.add(res);
+    });
+  }
+
   getCore() {
     return this.core;
   }
@@ -33,6 +48,14 @@ export default class BasicObj {
       return this;
     }
     return null;
+  }
+
+  addParent(basicObj) {
+    this.parentLevel = basicObj;
+  }
+
+  addSubLevel(basicObj) {
+    this.subLevel.push(basicObj);
   }
 
   complete = (func) => func()
