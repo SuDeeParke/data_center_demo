@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-expressions */
 import * as THREE from 'three';
 import { OrbitControls } from '@/assets/js/OrbitControls';
+import Stats from '@/assets/js/stats.module';
 import BasicCamera from './BasicCamera';
 import BasicRender from './BasicRender';
 import Tools from './Tools';
@@ -14,7 +16,11 @@ export default class Basic {
     this.pointer = null;
     this.selectedObjects = [];
     this.selectedObject = null;
-    this.beforeSelObj = null;
+    this.beforeSelObj = {
+      uuid: undefined,
+      color: undefined,
+    };
+    this.state = null;
   }
 
   init(domID) {
@@ -24,6 +30,7 @@ export default class Basic {
     document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
     this.controls = this.createControls();
     this.addPicker();
+    process.env.VUE_APP_DEV === 'true' ? this.createState() : null;
     return this;
   }
 
@@ -36,7 +43,6 @@ export default class Basic {
     scene.add(light);
     const ambientLight = new THREE.AmbientLight(0xcccccc);
     scene.add(ambientLight);
-    // eslint-disable-next-line no-unused-expressions
     process.env.VUE_APP_DEV === 'true' ? console.log('测试模式场景初始化完成！') : console.log('欢迎来到数据中心可视化系统！');
     return scene;
   }
@@ -95,7 +101,7 @@ export default class Basic {
     const curObj = this.selectedObject.object;
     if (curObj && curObj.userData.pickble) {
       if (this.beforeSelObj) {
-      // 恢复原来的颜色
+        // 恢复原来的颜色
         Tools.queryObject(this.beforeSelObj.uuid).forEach((element) => {
         // eslint-disable-next-line no-param-reassign
           element.material.color = this.beforeSelObj.color;
@@ -134,14 +140,24 @@ export default class Basic {
     }
   }
 
+  createState() {
+    const state = new Stats();
+    const div = document.createElement('div');
+    div.appendChild(state.dom);
+    document.body.appendChild(div);
+    this.state = state;
+  }
+
   render = () => {
     const { activeRenderer, renderer } = this.rendererPackge;
     const { camera } = this.cameraPackge;
-    const { scene, controls } = this;
+    const { scene, controls, state } = this;
     if (renderer && activeRenderer) {
       renderer.setAnimationLoop(() => {
+        state && state.begin();
         controls.update();
         renderer.render(scene, camera);
+        state && state.end();
       });
     }
   }

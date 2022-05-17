@@ -36,7 +36,7 @@ export default class BasicRender {
       const renderPass = new RenderPass(scene, camera);
       this.composer.addPass(renderPass);
       this.addOutlineEffect();
-      this.addFXAAEffect();
+      // this.addFXAAEffect();
     }
     this.activeRenderer = this.composer;
     return this.composer;
