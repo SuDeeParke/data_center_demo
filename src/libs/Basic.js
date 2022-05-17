@@ -21,17 +21,20 @@ export default class Basic {
       color: undefined,
     };
     this.state = null;
+    process.env.VUE_APP_DEV === 'true' ? window.THREE = THREE : null;
   }
 
   init(domID) {
-    this.scene = this.initScene();
-    this.cameraPackge = new BasicCamera();
-    this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.renderer);
-    document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
-    this.controls = this.createControls();
-    this.addPicker();
-    process.env.VUE_APP_DEV === 'true' ? this.createState() : null;
-    return this;
+    return new Promise((resolve) => {
+      this.scene = this.initScene();
+      this.cameraPackge = new BasicCamera();
+      this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.renderer);
+      document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
+      this.controls = this.createControls();
+      this.addPicker();
+      process.env.VUE_APP_DEV === 'true' ? this.createState() : null;
+      resolve(this);
+    });
   }
 
   initScene = () => {

@@ -8,23 +8,24 @@ import Basic from '@/libs/Basic';
 export default {
   name: 'Scene',
   mounted() {
-    const scene = new Basic();
-    scene.init('scene');
-    scene.addModle('models/data_center_full/JiFang.gltf', 'gltf');
-    scene.render();
+    const DataCenter = new Basic();
+    DataCenter.init('scene').then(() => {
+      DataCenter.addModle('models/data_center_full/JiFang.gltf', 'gltf');
+    });
+    DataCenter.render();
 
     //  window.addEventListener('resize', () => { Tools.onWindowResize(this.basicScene); });
     window.addEventListener('dblclick', (event) => {
       if (event.button === 0) {
-        scene.updatePointer(event);
-        scene.handlePick();
+        DataCenter.updatePointer(event);
+        DataCenter.handlePick();
       }
     });
     window.addEventListener('pointermove', (event) => {
-      scene.updatePointer(event);
-      scene.checkIntersection();
+      DataCenter.updatePointer(event);
+      DataCenter.checkIntersection();
     });
-    window.scene = scene;
+    window.DataCenter = DataCenter;
   },
 };
 </script>
