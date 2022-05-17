@@ -1,27 +1,41 @@
 import * as THREE from 'three';
 import { OrbitControls } from '@/assets/js/OrbitControls';
+import BasicCamera from './BasicCamera';
+import BasicRender from './BasicRender';
+import Tools from './Tools';
 
 export default class Basic {
   constructor() {
     this.scene = null;
-    this.camera = null;
-    this.renderer = null;
+    this.cameraPackge = null;
+    this.rendererPackge = null;
   }
 
-  initScene() {
-    this.scene = new THREE.Scene();
+  init(domID) {
+    this.scene = this.initScene();
+    this.cameraPackge = new BasicCamera();
+    this.rendererPackge = new BasicRender(domID);
+    this.addControls();
+    return this;
+  }
+
+  initScene = () => {
+    const scene = new THREE.Scene();
     // 灯光
     const light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(20, 20, 20);
-    this.scene.add(light);
+    scene.add(light);
     const ambientLight = new THREE.AmbientLight(0xcccccc);
-    this.scene.add(ambientLight);
-    return this.scene;
+    scene.add(ambientLight);
+    // eslint-disable-next-line no-unused-expressions
+    process.env.VUE_APP_DEV === 'true' ? console.log('测试模式场景初始化完成！') : console.log('欢迎来到数据中心可视化系统！');
+    return scene;
   }
 
   addControls() {
-    if (this.camera && this.renderer) {
-      const controls = new OrbitControls(this.camera, this.renderer.domElement);
+    const { renderer } = this.rendererPackge;
+    if (this.camera && renderer) {
+      const controls = new OrbitControls(this.camera, renderer.domElement);
       controls.listenToKeyEvents(window);
       // 设置滑动惯性
       controls.enableDamping = true;
@@ -39,9 +53,26 @@ export default class Basic {
     }
   }
 
+  addModle = (addr, type) => {
+    let obj;
+    if (type === 'fbx') {
+      obj = Tools.loadFBXModel(addr);
+    } else {
+      obj = Tools.loadGltfModle(addr);
+    }
+    console.log(obj);
+    // this.scene.add(obj);
+    return obj;
+  }
+
   render = () => {
-    if (this.renderer) {
-      this.renderer.render();
+    const { activeRenderer, renderer } = this.rendererPackge;
+    if (renderer && activeRenderer) {
+      renderer.setAnimationLoop(() => {
+        // eslint-disable-next-line no-unused-expressions
+        this.controls && this.controls.update();
+        activeRenderer.render();
+      });
     }
   }
 }

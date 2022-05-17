@@ -1,17 +1,19 @@
 <template>
-  <div>
+  <div id="scene">
 
   </div>
 </template>
 
 <script>
-import BasicCamera from '../libs/BasicCamera';
+import Basic from '@/libs/Basic';
 
 export default {
   name: 'Scene',
   mounted() {
-    const camera = new BasicCamera();
-    console.log(camera);
+    const scene = new Basic();
+    scene.init('scene');
+    scene.addModle('models/data_center_full/JiFang.gltf', 'gltf');
+    window.scene = scene;
   },
 };
 </script>
