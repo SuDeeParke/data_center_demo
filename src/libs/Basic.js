@@ -10,14 +10,20 @@ export default class Basic {
     this.cameraPackge = null;
     this.rendererPackge = null;
     this.controls = null;
+    this.raycaster = null;
+    this.pointer = null;
+    this.selectedObjects = [];
+    this.selectedObject = null;
+    this.beforeSelObj = null;
   }
 
   init(domID) {
     this.scene = this.initScene();
     this.cameraPackge = new BasicCamera();
-    this.rendererPackge = new BasicRender();
+    this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.renderer);
     document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
     this.controls = this.createControls();
+    this.addPicker();
     return this;
   }
 
@@ -67,6 +73,65 @@ export default class Basic {
     }
     this.scene.add(obj);
     return obj;
+  }
+
+  addPicker() {
+    this.raycaster = new THREE.Raycaster();
+    this.pointer = new THREE.Vector2();
+  }
+
+  updatePointer(event) {
+    // 将鼠标位置归一化为设备坐标。x 和 y 方向的取值范围是 (-1 to +1)
+    this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    this.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  }
+
+  addSelectedObject(object) {
+    this.selectedObjects = [];
+    this.selectedObjects.push(object);
+  }
+
+  handlePick() {
+    const curObj = this.selectedObject.object;
+    if (curObj && curObj.userData.pickble) {
+      if (this.beforeSelObj) {
+      // 恢复原来的颜色
+        Tools.queryObject(this.beforeSelObj.uuid).forEach((element) => {
+        // eslint-disable-next-line no-param-reassign
+          element.material.color = this.beforeSelObj.color;
+        });
+      }
+      if (this.beforeSelObj && this.beforeSelObj.uuid !== curObj.uuid) {
+        const { x, y, z } = this.selectedObject.point;
+        const point = { x: x + 3, y: y + 3, z: z + 3 };
+        this.cameraPackge.cameraFlyTo(this.controls, point);
+      }
+      // 克隆当前的颜色
+      this.beforeSelObj = {
+        uuid: curObj.uuid,
+        color: curObj.material.color.clone(),
+      };
+      // 设置选中颜色
+      curObj.material.color.set(0x00ffff);
+    }
+  }
+
+  checkIntersection() {
+    const { camera } = this.cameraPackge;
+    this.raycaster.setFromCamera(this.pointer, camera);
+    const intersects = this.raycaster.intersectObject(this.scene, true);
+    if (intersects.length > 0) {
+      [this.selectedObject] = intersects;
+      // 先取消hover的目标
+      Tools.hideBoxHelper(this.selectedObjects[0]);
+      // 再替换
+      this.addSelectedObject(this.selectedObject.object);
+      if (this.selectedObject.object.userData.pickble) {
+        // const { outlinePass } = this.rendererPackge;
+        // this.outlinePass.selectedObjects = this.selectedObjects;
+        Tools.showBoxHelper(this.selectedObject.object);
+      }
+    }
   }
 
   render = () => {

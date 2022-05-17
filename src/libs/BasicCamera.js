@@ -50,6 +50,5 @@ export default class BasicCamera {
       .to({ x: cloneCamera.rotation.x, y: cloneCamera.rotation.y, z: cloneCamera.rotation.z }, 1000)
       .easing(TWEEN.Easing.Back.Out).start();
     Tools.animate();
-    return this.camera;
   }
 }
