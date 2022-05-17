@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import { PerspectiveCamera } from 'three';
 import * as TWEEN from '@tweenjs/tween.js';
 import Tools from './Tools';
@@ -9,15 +10,15 @@ export default class BasicCamera {
       this.camera = this.orthoCam();
       return this.camera;
     }
-    this.camera = this.persCam();
+    this.persCam();
     return this;
   }
 
   persCam = () => {
     const aspectRatio = window.innerWidth / window.innerHeight;
-    const camera = new PerspectiveCamera(60, aspectRatio, 1, 10000);
-    camera.position.z = 50;
-    return camera;
+    this.camera = new PerspectiveCamera(60, aspectRatio, 1, 10000);
+    this.cameraSetPosition([50, 50, 50]);
+    return this.camera;
   }
 
   orthoCam = () => 'orthoCam to be continue...'
@@ -33,7 +34,7 @@ export default class BasicCamera {
     const controlTemp = control;
     const cloneCamera = this.camera.clone();
     this.camera.lookAt(point);
-    controlTemp.enabled = false;
+    controlTemp && (controlTemp.enabled = false);
     new TWEEN.Tween(this.camera.position)
       .to(point)
       .easing(TWEEN.Easing.Quadratic.Out)
@@ -43,7 +44,7 @@ export default class BasicCamera {
         this.camera.position.z = v.z;
       }, 1000)
       .onComplete(() => {
-        controlTemp.enabled = true;
+        controlTemp && (controlTemp.enabled = true);
       })
       .start();
     new TWEEN.Tween(this.camera.rotation)

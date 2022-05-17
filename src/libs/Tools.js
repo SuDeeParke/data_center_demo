@@ -80,7 +80,7 @@ export default class Tools {
       (box.max.y - box.min.y),
       (box.max.z - box.min.z),
     );
-    return window.scene.cameraPackge.camera.position.z / maxDiameter;
+    return window.DataCenter.cameraPackge.camera.position.z / maxDiameter;
   }
 
   // 设置模型到适合观察的大小
@@ -117,7 +117,7 @@ export default class Tools {
 
   static queryObject = (uuid) => {
     const result = [];
-    const objArr = Tools.getAllObject(window.scene.scene.children);
+    const objArr = Tools.getAllObject(window.DataCenter.scene.children);
     objArr.forEach((element) => {
       if (uuid === element.uuid) {
         result.push(element);
