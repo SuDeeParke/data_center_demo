@@ -9,18 +9,21 @@ export default class Basic {
     this.scene = null;
     this.cameraPackge = null;
     this.rendererPackge = null;
+    this.controls = null;
   }
 
   init(domID) {
     this.scene = this.initScene();
     this.cameraPackge = new BasicCamera();
-    this.rendererPackge = new BasicRender(domID);
-    this.addControls();
+    this.rendererPackge = new BasicRender();
+    document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
+    this.controls = this.createControls();
     return this;
   }
 
   initScene = () => {
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x155461);
     // 灯光
     const light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(20, 20, 20);
@@ -32,10 +35,11 @@ export default class Basic {
     return scene;
   }
 
-  addControls() {
+  createControls() {
     const { renderer } = this.rendererPackge;
-    if (this.camera && renderer) {
-      const controls = new OrbitControls(this.camera, renderer.domElement);
+    const { camera } = this.cameraPackge;
+    if (camera && renderer) {
+      const controls = new OrbitControls(camera, renderer.domElement);
       controls.listenToKeyEvents(window);
       // 设置滑动惯性
       controls.enableDamping = true;
@@ -49,29 +53,30 @@ export default class Basic {
       controls.screenSpacePanning = false;
       // 垂直旋转的角度的上限
       // controls.maxPolarAngle = Math.PI / 2;
-      this.controls = controls;
+      return controls;
     }
+    return null;
   }
 
-  addModle = (addr, type) => {
+  addModle = async (addr, type) => {
     let obj;
     if (type === 'fbx') {
       obj = Tools.loadFBXModel(addr);
     } else {
-      obj = Tools.loadGltfModle(addr);
+      obj = await Tools.loadGltfModle(addr);
     }
-    console.log(obj);
-    // this.scene.add(obj);
+    this.scene.add(obj);
     return obj;
   }
 
   render = () => {
     const { activeRenderer, renderer } = this.rendererPackge;
+    const { camera } = this.cameraPackge;
+    const { scene, controls } = this;
     if (renderer && activeRenderer) {
       renderer.setAnimationLoop(() => {
-        // eslint-disable-next-line no-unused-expressions
-        this.controls && this.controls.update();
-        activeRenderer.render();
+        controls.update();
+        renderer.render(scene, camera);
       });
     }
   }

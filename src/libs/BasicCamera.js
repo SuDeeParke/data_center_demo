@@ -10,13 +10,13 @@ export default class BasicCamera {
       return this.camera;
     }
     this.camera = this.persCam();
-    return this.camera;
+    return this;
   }
 
   persCam = () => {
     const aspectRatio = window.innerWidth / window.innerHeight;
     const camera = new PerspectiveCamera(60, aspectRatio, 1, 10000);
-    camera.position.z = 5;
+    camera.position.z = 50;
     return camera;
   }
 

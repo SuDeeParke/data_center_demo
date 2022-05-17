@@ -1,7 +1,5 @@
 <template>
-  <div id="scene">
-
-  </div>
+  <div id="scene"></div>
 </template>
 
 <script>
@@ -13,6 +11,7 @@ export default {
     const scene = new Basic();
     scene.init('scene');
     scene.addModle('models/data_center_full/JiFang.gltf', 'gltf');
+    scene.render();
     window.scene = scene;
   },
 };

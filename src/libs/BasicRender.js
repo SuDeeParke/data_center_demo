@@ -1,31 +1,28 @@
 import * as THREE from 'three';
-import { RenderPass } from '@/assets/js/postprocessing/RenderPass';
 import { EffectComposer } from '@/assets/js/postprocessing/EffectComposer';
+import { RenderPass } from '@/assets/js/postprocessing/RenderPass';
+// import { OutlinePass } from '@/assets/js/postprocessing/OutlinePass';
+// import { ShaderPass } from '@/assets/js/postprocessing/ShaderPass';
+// import { FXAAShader } from '@/assets/js/postprocessing/FXAAShader';
 
 export default class BasicRender {
-  constructor(domID) {
+  constructor() {
     this.renderer = null;
     this.composer = null;
     this.activeRenderer = null;
-    this.addRender(domID);
+    this.renderer = this.createRender();
   }
 
-  addRender(domID) {
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.outputEncoding = THREE.BasicDepthPacking;
-    document.getElementById(domID).appendChild(this.renderer.domElement);
-    this.activeRenderer = this.renderer;
-    return this.renderer;
+  createRender = () => {
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.outputEncoding = THREE.BasicDepthPacking;
+    this.activeRenderer = renderer;
+    return renderer;
   }
 
-  addShadow() {
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  }
-
-  addComposer(scene, camera) {
+  createComposer(scene, camera) {
     this.composer = new EffectComposer(this.renderer);
     if (this.scene && this.camera) {
       const renderPass = new RenderPass(scene, camera);
@@ -37,11 +34,13 @@ export default class BasicRender {
     return this.composer;
   }
 
-  render() {
-    if (this.renderer) {
-      this.renderer.setAnimationLoop(() => {
-        this.activeRenderer.render();
-      });
-    }
+  addShadow() {
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  }
+
+  addPicker() {
+    this.raycaster = new THREE.Raycaster();
+    this.pointer = new THREE.Vector2();
   }
 }
