@@ -1,11 +1,9 @@
-import * as THREE from 'three';
-import Basic from './Basic';
+import { PerspectiveCamera } from 'three';
 
-export default class BasicCamera extends Basic {
+export default class BasicCamera {
   constructor() {
-    super();
     const aspectRatio = window.innerWidth / window.innerHeight;
-    this.camera = new THREE.PerspectiveCamera(60, aspectRatio, 1, 10000);
+    this.camera = new PerspectiveCamera(60, aspectRatio, 1, 10000);
     this.camera.position.z = 5;
   }
 }
