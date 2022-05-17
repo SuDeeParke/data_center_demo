@@ -13,7 +13,9 @@ export default {
     DataCenter.init('scene').then(() => {
       DataCenter.addModle('models/data_center_full/JiFang.gltf', 'gltf');
     });
-    new Building().init(DataCenter.scene, 'models/office_building/scene.gltf');
+    const building = new Building();
+    building.init(DataCenter.scene, 'models/office_building/scene.gltf');
+    building.registerEvent('dblclick');
     DataCenter.render();
 
     //  window.addEventListener('resize', () => { Tools.onWindowResize(this.basicScene); });

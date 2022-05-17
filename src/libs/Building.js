@@ -6,4 +6,11 @@ export default class Building extends BasicObj {
     this.pickable = true;
     return this;
   }
+
+  // registerEvent = (eventType) => {
+  //   console.log(eventType);
+  //   window.addEventListener(eventType, (event) => {
+  //     console.log(event);
+  //   });
+  // }
 }

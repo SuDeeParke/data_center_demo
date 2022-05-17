@@ -1,4 +1,3 @@
-import { SkeletonHelper } from 'three';
 import Tools from './Tools';
 
 export default class BasicObj {
@@ -20,9 +19,16 @@ export default class BasicObj {
     return this.core;
   }
 
-  addOutLine() {
-    const helper = new SkeletonHelper(this.core);
-    this.parent.add(helper);
+  handlePick = () => { }
+
+  registerEvent = () => {}
+
+  addParent(basicObj) {
+    this.parentLevel = basicObj;
+  }
+
+  addSubLevel(basicObj) {
+    this.subLevel.push(basicObj);
   }
 
   /**
@@ -48,14 +54,6 @@ export default class BasicObj {
       return this;
     }
     return null;
-  }
-
-  addParent(basicObj) {
-    this.parentLevel = basicObj;
-  }
-
-  addSubLevel(basicObj) {
-    this.subLevel.push(basicObj);
   }
 
   complete = (func) => func()
