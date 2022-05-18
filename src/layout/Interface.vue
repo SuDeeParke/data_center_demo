@@ -1,6 +1,8 @@
 <template>
   <div class="interface">
-    <section class="top"></section>
+    <section class="top">
+      <TopBrand></TopBrand>
+    </section>
     <section class="left">
       <Menu></Menu>
     </section>
@@ -11,17 +13,18 @@
 
 <script>
 import Menu from '../components/Menu.vue';
+import TopBrand from '../components/TopBrand.vue';
 
 export default {
   name: 'Interface',
-  components: { Menu },
+  components: { Menu, TopBrand },
 };
 </script>
 
 <style lang="scss" scoped>
 $leftWidth: 80px;
 $rightWidth: 300px;
-$topHight: 80px;
+$topHight: 70px;
 $bottomHight: 50px;
 
 $calcHight: calc(100% - $topHight - $bottomHight);
@@ -50,6 +53,7 @@ $calcWidth: calc(100% - $leftWidth - $rightWidth);
     width: 100%;
     height: $topHight;
     flex-direction: row;
+    align-items: flex-start;
   }
   section.left {
     top: $topHight;
