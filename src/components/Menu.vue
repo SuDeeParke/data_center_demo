@@ -52,7 +52,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$themeColor: #337ab7;
 $selectedShadow: 2px 2px 5px 2px rgba($color: #000, $alpha: 0.3);
 .menu{
   display: block;
@@ -78,7 +77,7 @@ $selectedShadow: 2px 2px 5px 2px rgba($color: #000, $alpha: 0.3);
     &:hover{
     //  box-shadow: inset $selectedShadow;
       i{
-        color: #337ab7;
+        color: var(--theme-color);
       }
     }
     i{
