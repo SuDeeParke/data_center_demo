@@ -4,15 +4,12 @@
     <button
         :class="['basic-button', {'selected': activeButton === item.name}]"
         :name="item.name"
-        :key="index">
+        :key="index"
+        @click="handleClick(item)"
+    >
           <i :class="['iconfont-menu', item.class]"></i>
         </button>
     </template>
-
-    <!-- <button class = 'basic-button' alt="蓄电池"><i class="iconfont icon-jiguihang"></i></button>
-    <button class = 'basic-button' alt="空调"><i class="iconfont-menu"> </i></button>
-    <button class = 'basic-button' alt="照明"><i class="iconfont-menu"> </i></button>
-    <button class = 'basic-button' alt="设置"><i class="iconfont-menu"> </i></button> -->
   </div>
 </template>
 
@@ -45,6 +42,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    handleClick(cur) {
+      this.activeButton = cur.name;
+    },
   },
 };
 </script>
