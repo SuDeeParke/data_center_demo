@@ -102,6 +102,7 @@ export default class Basic {
 
   handlePick() {
     const curObj = this.selectedObject.object;
+    console.log(this.selectedObject.object);
     if (curObj && curObj.userData.pickble) {
       if (this.beforeSelObj) {
         // 恢复原来的颜色
@@ -138,7 +139,8 @@ export default class Basic {
       if (this.selectedObject.object.userData.pickble) {
         // const { outlinePass } = this.rendererPackge;
         // this.outlinePass.selectedObjects = this.selectedObjects;
-        Tools.showBoxHelper(this.selectedObject.object);
+        // Tools.showBoxHelper(this.selectedObject.object);
+        Tools.showPanel(this.selectedObject.object, this.scene);
       }
     }
   }

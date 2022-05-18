@@ -1,3 +1,5 @@
+/* eslint-disable no-mixed-operators */
+/* eslint-disable no-lonely-if */
 import * as TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
 import { GLTFLoader } from '@/assets/js/GLTFLoader';
@@ -145,6 +147,45 @@ export default class Tools {
     const boxHelps = obj && obj.children.filter((item) => item instanceof THREE.BoxHelper);
     if (boxHelps && boxHelps.length !== 0) {
       boxHelps.forEach((item) => {
+        // eslint-disable-next-line no-param-reassign
+        item.visible = false;
+      });
+    }
+  }
+
+  static showPanel = (obj, scene) => {
+    // 用canvas生成图片
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 100;
+    canvas.height = 50;
+    // 制作矩形
+    ctx.fillStyle = 'rgba(255, 255, 255,0.8)';
+    ctx.fillRect(0, 0, 100, 50);
+    // 设置文字
+    ctx.fillStyle = '#222';
+    ctx.font = 'normal 20pt "楷体"';
+    // 文字换行
+    ctx.fillText('textword', 15, 35);
+    // 生成图片
+    const url = canvas.toDataURL('image/png');
+    const map = new THREE.TextureLoader().load(url);
+    const spriteMaterial = new THREE.SpriteMaterial({
+      map, // 设置精灵纹理贴图
+      transparent: true, // 开启透明(纹理图片png有透明信息)
+    });
+    // 创建精灵模型对象，不需要几何体geometry参数
+    const sprite = new THREE.Sprite(spriteMaterial);
+    sprite.scale.set(1, 1, 1); // 精灵图大小
+    sprite.translateY(50);
+    sprite.position.set(...obj.parent.parent.position);
+    scene.add(sprite);
+  }
+
+  static hideBoxHelper = (obj) => {
+    const sprites = obj && obj.children.filter((item) => item instanceof THREE.BoxHelper);
+    if (sprites && sprites.length !== 0) {
+      sprites.forEach((item) => {
         // eslint-disable-next-line no-param-reassign
         item.visible = false;
       });
