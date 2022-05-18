@@ -21,7 +21,7 @@ export default {
   backdrop-filter: blur(10px);
   padding: 10px;
   border-radius: 0;
-  border-top-right-radius: 10px;
-  border-end-end-radius: 10px;
+  border-top-left-radius: 10px;
+  border-end-start-radius: 10px;
 }
 </style>

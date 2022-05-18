@@ -6,7 +6,8 @@
     <section class="left">
       <Menu></Menu>
     </section>
-    <section class="right"></section>
+    <section class="right">
+    </section>
     <section class="bottom"></section>
   </div>
 </template>
@@ -29,6 +30,11 @@ $bottomHight: 50px;
 
 $calcHight: calc(100% - $topHight - $bottomHight);
 $calcWidth: calc(100% - $leftWidth - $rightWidth);
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 .interface{
   position: absolute;
   top: 0;
