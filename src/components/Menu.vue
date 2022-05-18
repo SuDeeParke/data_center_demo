@@ -1,15 +1,18 @@
 <template>
   <div class="menu" >
+    <template v-for="(item, index) in buttonList">
     <button
-     class = 'basic-button'
-    :class="{'selected': activeButton === '机柜'}"
-    alt="机柜">
-      <i class="iconfont-menu">&#xe658;</i>
-    </button>
-    <button class = 'basic-button' alt="蓄电池"><i class="iconfont icon-jiguihang"> </i></button>
+        :class="['basic-button', {'selected': activeButton === item.name}]"
+        :name="item.name"
+        :key="index">
+          <i :class="['iconfont-menu', item.class]"></i>
+        </button>
+    </template>
+
+    <!-- <button class = 'basic-button' alt="蓄电池"><i class="iconfont icon-jiguihang"></i></button>
     <button class = 'basic-button' alt="空调"><i class="iconfont-menu"> </i></button>
     <button class = 'basic-button' alt="照明"><i class="iconfont-menu"> </i></button>
-    <button class = 'basic-button' alt="设置"><i class="iconfont-menu"> </i></button>
+    <button class = 'basic-button' alt="设置"><i class="iconfont-menu"> </i></button> -->
   </div>
 </template>
 
@@ -19,6 +22,28 @@ export default {
   data() {
     return {
       activeButton: '机柜',
+      buttonList: [
+        {
+          name: '机柜',
+          class: 'icon-jiguihang',
+        },
+        {
+          name: '蓄电池',
+          class: 'icon-xudianchi',
+        },
+        {
+          name: '空调',
+          class: 'icon-kongtiao',
+        },
+        {
+          name: '照明',
+          class: 'icon-zhaoming',
+        },
+        {
+          name: '设置',
+          class: 'icon-shezhi',
+        },
+      ],
     };
   },
 };
