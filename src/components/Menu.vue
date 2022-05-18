@@ -56,8 +56,8 @@ $selectedShadow: 2px 2px 5px 2px rgba($color: #000, $alpha: 0.3);
 .menu{
   display: block;
   width: 100%;
-  background: rgba($color: #fff, $alpha: 0.8);
-  backdrop-filter: blur(20px);
+  background-color: var(--panel-bg-color);
+  backdrop-filter: blur(10px);
   padding: 10px;
   border-radius: 0;
   border-top-right-radius: 10px;
@@ -74,6 +74,7 @@ $selectedShadow: 2px 2px 5px 2px rgba($color: #000, $alpha: 0.3);
     margin-bottom: 20px;
     cursor: pointer;
     transition: all 0.3s;
+    background-color: #eee;
     &:hover{
     //  box-shadow: inset $selectedShadow;
       i{
