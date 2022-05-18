@@ -14,6 +14,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$leftWidth: 80px;
+$rightWidth: 300px;
+$topHight: 80px;
+$bottomHight: 50px;
+
+$calcHight: calc(100% - $topHight - $bottomHight);
+$calcWidth: calc(100% - $leftWidth - $rightWidth);
 .interface{
   position: absolute;
   top: 0;
@@ -36,27 +43,27 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: $topHight;
     flex-direction: row;
   }
   section.left {
-    top: 0;
+    top: $topHight;
     left: 0;
-    width: 80px;
-    height: 100%;
+    width: $leftWidth;
+    height: $calcHight;
     flex-direction: column;
   }
   section.right {
-    top: 0;
+    top: $topHight;
     right: 0;
-    width: 300px;
-    height: 100%;
+    width: $rightWidth;
+    height: $calcHight;
   }
   section.bottom{
     bottom: 10px;
-    left: 0;
-    width: 100%;
-    height: 50px;
+    left: $leftWidth;
+    width: $calcWidth;
+    height: $bottomHight;
   }
 }
 
