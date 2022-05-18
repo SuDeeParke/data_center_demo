@@ -1,15 +1,20 @@
 <template>
   <div class="interface">
     <section class="top"></section>
-    <section class="left"></section>
+    <section class="left">
+      <Menu></Menu>
+    </section>
     <section class="right"></section>
     <section class="bottom"></section>
   </div>
 </template>
 
 <script>
+import Menu from '../components/Menu.vue';
+
 export default {
   name: 'Interface',
+  components: { Menu },
 };
 </script>
 
@@ -34,7 +39,7 @@ $calcWidth: calc(100% - $leftWidth - $rightWidth);
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba($color: #ffffff, $alpha: 0.2);
+    background: rgba($color: #000, $alpha: 0.5);
     backdrop-filter: blur(10px);
     border-radius: 10px;
     pointer-events: all;
