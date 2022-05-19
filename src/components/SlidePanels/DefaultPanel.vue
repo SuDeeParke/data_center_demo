@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import InfoPanel from '../components/InfoPanel.vue';
+import InfoPanel from '../InfoPanel.vue';
 
 export default {
   components: { InfoPanel },

@@ -16,7 +16,7 @@
 <script>
 import Menu from '../components/Menu.vue';
 import TopBrand from '../components/TopBrand.vue';
-import CabinetPanel from './CabinetPanel.vue';
+import CabinetPanel from '../components/SlidePanels/CabinetPanel.vue';
 
 export default {
   name: 'Interface',
