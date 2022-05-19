@@ -1,7 +1,12 @@
 <template>
   <div class="slide-panel">
-    <h1 class="panel-title">设置</h1>
-    <InfoPanel title="深色模式"></InfoPanel>
+    <div class="title-block">
+      <h1 class="panel-title">设置</h1>
+    </div>
+    <div class="panel-wrap">
+      <InfoPanel title="深色模式"></InfoPanel>
+    </div>
+
   </div>
 </template>
 

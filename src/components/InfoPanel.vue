@@ -33,7 +33,7 @@ export default {
   border-radius: 10px;
   background-color: rgba($color: #fff, $alpha: 0.8);
   backdrop-filter: blur(5px);
-  box-shadow: 0 0 1px 2px rgba($color: #000, $alpha: 0.1);
+  box-shadow: 0 0 5px 2px rgba($color: #000, $alpha: 0.1);
   margin-bottom: 20px;
   &:nth-last-of-type(1){
     margin-bottom: 0;

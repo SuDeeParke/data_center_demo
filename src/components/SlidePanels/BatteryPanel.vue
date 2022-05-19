@@ -1,20 +1,24 @@
 <template>
   <div class="slide-panel">
-    <h1 class="panel-title">蓄电池</h1>
-    <InfoPanel title="电池状态">
-      <div class="battery"><span class="value">{{state}}</span><span class="unit"> </span></div>
-      <div class="opration">
-        <el-radio v-model="radio" :label="-1">放电</el-radio>
-        <el-radio v-model="radio" :label="0">自动</el-radio>
-        <el-radio v-model="radio" :label="1">充电</el-radio>
-      </div>
-    </InfoPanel>
-    <InfoPanel title="电量">
-      <div class="info"><span class="value">42</span><span class="unit"> %</span></div>
-    </InfoPanel>
-    <InfoPanel title="健康度">
-      <div class="info"><span class="value">80</span><span class="unit"> %</span></div>
-    </InfoPanel>
+    <div class="title-block">
+      <h1 class="panel-title">蓄电池</h1>
+    </div>
+    <div class="panel-wrap">
+      <InfoPanel title="电池状态">
+        <div class="battery"><span class="value">{{state}}</span><span class="unit"> </span></div>
+        <div class="opration">
+          <el-radio v-model="radio" :label="-1">放电</el-radio>
+          <el-radio v-model="radio" :label="0">自动</el-radio>
+          <el-radio v-model="radio" :label="1">充电</el-radio>
+        </div>
+      </InfoPanel>
+      <InfoPanel title="电量">
+        <div class="info"><span class="value">42</span><span class="unit"> %</span></div>
+      </InfoPanel>
+      <InfoPanel title="健康度">
+        <div class="info"><span class="value">80</span><span class="unit"> %</span></div>
+      </InfoPanel>
+    </div>
   </div>
 </template>
 
