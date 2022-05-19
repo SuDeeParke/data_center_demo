@@ -7,9 +7,11 @@
       <InfoPanel title="电池状态">
         <div class="battery"><span class="value">{{state}}</span><span class="unit"> </span></div>
         <div class="opration">
-          <el-radio v-model="radio" :label="-1">放电</el-radio>
-          <el-radio v-model="radio" :label="0">自动</el-radio>
-          <el-radio v-model="radio" :label="1">充电</el-radio>
+          <el-radio-group v-model="radio">
+            <el-radio :label="-1" >放电</el-radio>
+            <el-radio :label="0">自动</el-radio>
+            <el-radio :label="1">充电</el-radio>
+          </el-radio-group>
         </div>
       </InfoPanel>
       <InfoPanel title="电量">

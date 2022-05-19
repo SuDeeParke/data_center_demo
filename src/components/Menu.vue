@@ -48,7 +48,6 @@ export default {
     handleClick(cur) {
       this.activeButton = cur.name;
       this.$store.state.acctivePanel = cur.name;
-      console.log(this.$store.state);
     },
   },
   mounted() {
