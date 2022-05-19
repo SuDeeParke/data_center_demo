@@ -17,6 +17,8 @@ export default {
   width: 100%;
   height: auto;
   min-height: 600px;
+  max-height: 100%;
+  overflow-y: auto;
   background-color: var(--panel-bg-color);
   backdrop-filter: blur(10px);
   padding: 10px;
