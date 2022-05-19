@@ -1,17 +1,21 @@
 <template>
   <div class="info-panel">
-    <h5>{{title}}</h5>
-    <slot></slot>
+    <h3>{{title}}</h3>
+    <div class="content">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'InfoPanel',
-  props: [{
-    title: String,
-    default: 'Infomation',
-  }],
+  props: {
+    title: {
+      type: String,
+      default: 'Infomation',
+    },
+  },
 };
 </script>
 
@@ -27,8 +31,27 @@ export default {
   height: auto;
   min-height: 200px;
   border-radius: 10px;
-  background-color: rgba($color: #fff, $alpha: 0.9);
+  background-color: rgba($color: #fff, $alpha: 0.8);
   backdrop-filter: blur(5px);
-  box-shadow: 0 0 1px rgba($color: #000, $alpha: 0.1);
+  box-shadow: 0 0 1px 2px rgba($color: #000, $alpha: 0.1);
+  margin-bottom: 20px;
+  &:nth-last-of-type(1){
+    margin-bottom: 0;
+  }
+  div.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  h3{
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    text-align: left;
+    font-weight: bold;
+  }
 }
 </style>

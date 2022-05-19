@@ -7,6 +7,7 @@
       <Menu></Menu>
     </section>
     <section class="right">
+      <CabinetPanel></CabinetPanel>
     </section>
     <section class="bottom"></section>
   </div>
@@ -15,10 +16,11 @@
 <script>
 import Menu from '../components/Menu.vue';
 import TopBrand from '../components/TopBrand.vue';
+import CabinetPanel from './CabinetPanel.vue';
 
 export default {
   name: 'Interface',
-  components: { Menu, TopBrand },
+  components: { Menu, TopBrand, CabinetPanel },
 };
 </script>
 
