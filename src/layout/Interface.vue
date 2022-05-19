@@ -7,9 +7,15 @@
       <Menu></Menu>
     </section>
     <section class="right">
-      <CabinetPanel></CabinetPanel>
+      <CabinetPanel v-if="sharedState.acctivePanel === '机柜'"></CabinetPanel>
+      <BatteryPanel v-if="sharedState.acctivePanel === '蓄电池'"></BatteryPanel>
+      <AirCondition v-if="sharedState.acctivePanel === '空调'"></AirCondition>
+      <SettingPanel v-if="sharedState.acctivePanel === '设置'"></SettingPanel>
+      <DefaultPanel v-if="sharedState.acctivePanel === 'Default'"></DefaultPanel>
     </section>
-    <section class="bottom"></section>
+    <section class="bottom">
+      {{sharedState.message}}
+    </section>
   </div>
 </template>
 
@@ -17,10 +23,27 @@
 import Menu from '../components/Menu.vue';
 import TopBrand from '../components/TopBrand.vue';
 import CabinetPanel from '../components/SlidePanels/CabinetPanel.vue';
+import BatteryPanel from '../components/SlidePanels/BatteryPanel.vue';
+import AirCondition from '../components/SlidePanels/AirCondition.vue';
+import SettingPanel from '../components/SlidePanels/SettingPanel.vue';
+import DefaultPanel from '../components/SlidePanels/DefaultPanel.vue';
 
 export default {
   name: 'Interface',
-  components: { Menu, TopBrand, CabinetPanel },
+  data() {
+    return {
+      sharedState: this.$store.state,
+    };
+  },
+  components: {
+    Menu,
+    TopBrand,
+    CabinetPanel,
+    BatteryPanel,
+    AirCondition,
+    SettingPanel,
+    DefaultPanel,
+  },
 };
 </script>
 

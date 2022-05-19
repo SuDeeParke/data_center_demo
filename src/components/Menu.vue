@@ -41,12 +41,17 @@ export default {
           class: 'icon-shezhi',
         },
       ],
+      sharedState: this.$store.state,
     };
   },
   methods: {
     handleClick(cur) {
       this.activeButton = cur.name;
+      this.$store.state.acctivePanel = cur.name;
     },
+  },
+  mounted() {
+    this.$store.state.acctivePanel = this.activeButton;
   },
 };
 </script>

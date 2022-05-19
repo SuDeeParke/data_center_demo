@@ -12,7 +12,7 @@ module.exports = {
         .loader('sass-resources-loader')
         .options({
           // 公用scss
-          resources: './src/styles/main.scss',
+          resources: './src/assets/styles/main.scss',
         })
         .end();
     });

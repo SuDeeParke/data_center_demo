@@ -2,7 +2,7 @@
   <div class="slide-panel">
     <h1 class="panel-title">蓄电池</h1>
     <InfoPanel title="电池状态">
-      <div class="info"><span class="value">充电中</span><span class="unit"> </span></div>
+      <div class="battery"><span class="value">充电中</span><span class="unit"> </span></div>
     </InfoPanel>
     <InfoPanel title="电量">
       <div class="info"><span class="value">42</span><span class="unit"> %</span></div>
@@ -29,6 +29,11 @@ export default {
     text-align: left;
     font-size: 36px;
     padding: 20px 0;
+  }
+}
+.battery{
+  .value{
+    font-size: 67px;
   }
 }
 .info{

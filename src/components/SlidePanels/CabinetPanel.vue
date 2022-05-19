@@ -11,7 +11,7 @@
       <div class="info"><span class="value">24</span><span class="unit"> ºC</span></div>
     </InfoPanel>
     <InfoPanel title="用电量">
-      <div class="info"><span class="value">498</span><span class="unit"> kW·h</span></div>
+      <div class="info electric"><span class="value">498</span><span class="unit"> kW·h</span></div>
     </InfoPanel>
   </div>
 </template>
@@ -40,6 +40,15 @@ export default {
   text-align: center;
   .unit{
     font-size: 50px;
+  }
+}
+.electric{
+  font-size: 16px;
+  .value{
+    font-size: 67px;
+  }
+  .unit{
+    font-size: 36px;
   }
 }
 </style>

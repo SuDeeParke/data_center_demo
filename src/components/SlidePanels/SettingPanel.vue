@@ -1,18 +1,7 @@
 <template>
   <div class="slide-panel">
-    <h1 class="panel-title">机柜</h1>
-    <InfoPanel title="可用容量">
-      <div class="info"><span class="value">20</span><span class="unit"> u</span></div>
-    </InfoPanel>
-    <InfoPanel title="总容量">
-      <div class="info"><span class="value">42</span><span class="unit"> u</span></div>
-    </InfoPanel>
-    <InfoPanel title="平均温度">
-      <div class="info"><span class="value">24</span><span class="unit"> ºC</span></div>
-    </InfoPanel>
-    <InfoPanel title="用电量">
-      <div class="info"><span class="value">498</span><span class="unit"> kW·h</span></div>
-    </InfoPanel>
+    <h1 class="panel-title">设置</h1>
+    <InfoPanel title="深色模式"></InfoPanel>
   </div>
 </template>
 
