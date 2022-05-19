@@ -18,7 +18,7 @@ export default {
   name: 'Menu',
   data() {
     return {
-      activeButton: '机柜',
+      activeButton: '',
       buttonList: [
         {
           name: '机柜',
@@ -48,6 +48,7 @@ export default {
     handleClick(cur) {
       this.activeButton = cur.name;
       this.$store.state.acctivePanel = cur.name;
+      console.log(this.$store.state);
     },
   },
   mounted() {

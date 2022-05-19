@@ -11,7 +11,7 @@
       <BatteryPanel v-if="sharedState.acctivePanel === '蓄电池'"></BatteryPanel>
       <AirCondition v-if="sharedState.acctivePanel === '空调'"></AirCondition>
       <SettingPanel v-if="sharedState.acctivePanel === '设置'"></SettingPanel>
-      <DefaultPanel v-if="sharedState.acctivePanel === 'Default'"></DefaultPanel>
+      <DefaultPanel v-if="sharedState.acctivePanel === '照明'"></DefaultPanel>
     </section>
     <section class="bottom">
       {{sharedState.message}}
@@ -49,7 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 $leftWidth: 80px;
-$rightWidth: 300px;
+$rightWidth: 350px;
 $topHight: 70px;
 $bottomHight: 50px;
 
@@ -73,7 +73,7 @@ $calcWidth: calc(100% - $leftWidth - $rightWidth);
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba($color: #000, $alpha: 0.5);
+    background: rgba($color: #000, $alpha: 0);
     backdrop-filter: blur(10px);
     border-radius: 10px;
     pointer-events: all;

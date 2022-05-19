@@ -5,13 +5,20 @@ const store = {
     acctivePanel: 'Default',
   },
   setMessageAction(newValue) {
-    if (this.debug) console.log('setMessageAction triggered with', newValue);
-    if (newValue === '' || newValue === '照明') { this.state.acctivePanel = 'Default'; } else {
+    if (this.debug) {
+      console.log('setMessageAction triggered with', newValue);
+    }
+    if (newValue === '' || newValue === '照明') {
+      this.state.acctivePanel = 'Default';
+    } else {
+      console.log(newValue);
       this.state.acctivePanel = newValue;
     }
   },
   clearMessageAction() {
-    if (this.debug) console.log('clearMessageAction triggered');
+    if (this.debug) {
+      console.log('clearMessageAction triggered');
+    }
     this.state.acctivePanel = 'Default';
   },
 };

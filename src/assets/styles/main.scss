@@ -12,6 +12,8 @@
   border-radius: 0;
   border-top-left-radius: 10px;
   border-end-start-radius: 10px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
     //滚动条背景
     ::-webkit-scrollbar {
       width: .5rem;

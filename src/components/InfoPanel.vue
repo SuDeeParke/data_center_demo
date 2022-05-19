@@ -29,7 +29,7 @@ export default {
   display: block;
   width: 100%;
   height: auto;
-  min-height: 200px;
+  min-height: 100px;
   border-radius: 10px;
   background-color: rgba($color: #fff, $alpha: 0.8);
   backdrop-filter: blur(5px);

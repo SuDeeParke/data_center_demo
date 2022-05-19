@@ -17,6 +17,7 @@ body {
   font-size: 10px;
   font-family: Microsoft YaHei, Microsoft YaHei-Normal;
   background: #eee;
+  overflow: hidden;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

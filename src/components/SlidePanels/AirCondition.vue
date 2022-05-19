@@ -71,7 +71,7 @@ export default {
 .setting{
   display: block;
   width: 80%;
-  height: 50px;
+  padding-bottom: 20px;
   h2{
     display: block;
     font-size: 18px;

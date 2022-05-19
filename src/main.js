@@ -1,5 +1,7 @@
 import Vue from 'vue';
-import { Button, Switch, Slider } from 'element-ui';
+import {
+  Button, Switch, Slider, Radio,
+} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/styles/iconfont.css';
 import App from './App.vue';
@@ -10,6 +12,7 @@ Vue.prototype.$store = store;
 
 Vue.config.productionTip = false;
 Vue.use(Button);
+Vue.use(Radio);
 Vue.use(Switch);
 Vue.use(Slider);
 new Vue({
