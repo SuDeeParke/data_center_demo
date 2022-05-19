@@ -34,11 +34,6 @@ export default {
 <style lang="scss" scoped>
 .slide-panel{
   @include slidePanel;
-  h1.panel-title{
-    text-align: left;
-    font-size: 36px;
-    padding: 20px 0;
-  }
 }
 .info{
   font-size: 100px;
