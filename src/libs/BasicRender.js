@@ -12,6 +12,7 @@ export default class BasicRender {
     this.activeRenderer = null;
     this.outlinePass = null;
     this.effectFXAA = null;
+    this.outlinePass = this.addOutlineEffect(scene, camera);
     this.renderer = this.createRender();
     this.composer = this.createComposer(scene, camera);
   }
@@ -35,8 +36,9 @@ export default class BasicRender {
     if (this.scene && this.camera) {
       const renderPass = new RenderPass(scene, camera);
       this.composer.addPass(renderPass);
-      this.addOutlineEffect();
+      // this.addOutlineEffect(scene, camera);
       // this.addFXAAEffect();
+      this.composer.addPass(this.outlinePass);
     }
     this.activeRenderer = this.composer;
     return this.composer;
@@ -51,28 +53,30 @@ export default class BasicRender {
     this.composer.addPass(this.effectFXAA);
   }
 
-  addOutlineEffect() {
-    this.outlinePass = new OutlinePass(
+  addOutlineEffect = (scene, camera) => {
+    const outlinePass = new OutlinePass(
       new THREE.Vector2(window.innerWidth, window.innerHeight),
-      this.scene,
-      this.camera,
+      scene,
+      camera,
     );
     // 轮廓宽度
-    this.outlinePass.edgeStrength = 2;
+    outlinePass.edgeStrength = 2;
     // 发光
-    this.outlinePass.edgeGlow = 1;
+    outlinePass.edgeGlow = 1;
     // 虚化
-    this.outlinePass.edgeThickness = 1;
+    outlinePass.edgeThickness = 1;
     // 没有被遮挡的颜色
-    this.outlinePass.visibleEdgeColor.set('#ffca28');
+    outlinePass.visibleEdgeColor.set('#ffca28');
     // 被遮挡部分的颜色
-    this.outlinePass.hiddenEdgeColor.set('#ffffff');
+    outlinePass.hiddenEdgeColor.set('#ffffff');
     // 是否使用父级的材质
-    this.outlinePass.usePatternTexture = false;
+    outlinePass.usePatternTexture = false;
     // 边框弯曲度
-    this.outlinePass.downSampleRatio = 2;
+    outlinePass.downSampleRatio = 2;
     // 鼠标移开之后是否清除
-    this.outlinePass.clear = true;
-    this.composer.addPass(this.outlinePass);
+    outlinePass.clear = true;
+    // this.composer.addPass(outlinePass);
+    // this.outlinePass = outlinePass;
+    return outlinePass;
   }
 }
