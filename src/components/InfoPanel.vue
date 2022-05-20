@@ -39,28 +39,28 @@ export default {
   border-right: 5px solid var(--theme-color);
   overflow: hidden;
   transition: all 0.3s ease-out;
-  &::before{
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: var(--theme-color);
-    transform: translate(100%,0);
-    transition: all 0.3s ease-in;
-    z-index: -1;
-  }
+  // &::before{
+  //   content: '';
+  //   display: block;
+  //   width: 100%;
+  //   height: 100%;
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   background-color: var(--theme-color);
+  //   transform: translate(100%,0);
+  //   transition: all 0.3s ease-in;
+  //   z-index: -1;
+  // }
   &:nth-last-of-type(1){
     margin-bottom: 0;
   }
-  &:hover{
-    color: #f6f6f6;
-    &::before{
-        transform: translate(0%,0);
-      }
-  }
+  // &:hover{
+  //   color: #f6f6f6;
+  //   &::before{
+  //       transform: translate(0%,0);
+  //     }
+  // }
   div.content{
     display: flex;
     flex-direction: column;
