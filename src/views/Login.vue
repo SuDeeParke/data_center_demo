@@ -18,23 +18,23 @@
             <div class="login-input">
               <input
                 type="text"
-                name="username"
+                name="phone"
                 required="required"
-                v-model="username"
+                v-model="phone"
                 @focus="numbFocus()"
                 @blur="inputOnBlur()"
                 :class="tipUsr !== null ? 'warning': ''"
               />
-              <label>工号</label>
+              <label>手机号</label>
               <span class="tips">{{ tipUsr }}</span>
             </div>
             <!-- 密码 -->
             <div class="login-input">
               <input
                 type="password"
-                name="pwd"
+                name="password"
                 required="required"
-                v-model="pwd"
+                v-model="password"
                 @focus="pwdFocus()"
                 @blur="inputOnBlur()"
                 :class="tipPwd !== null ? 'warning': ''"
@@ -84,25 +84,17 @@
 </template>
 
 <script>
-// import { login } from "@/api/Login.js";
+import { login } from '../api/user';
 
 export default {
   name: 'login',
   data() {
     return {
-      // icons: [
-      //   // eslint-disable-next-line global-require
-      //   require('../assets/svgs/gear.svg'),
-      //   // eslint-disable-next-line global-require
-      //   require('../assets/svgs/user.svg'),
-      //   // eslint-disable-next-line global-require
-      //   require('../assets/svgs/lock.svg'),
-      // ],
       bgicon: 0,
       downIcon: true,
-      username: '', // 工号
-      pwd: '', // 密码
-      tipUsr: null, // 工号不对时提示
+      phone: '', // 工号
+      password: '', // 密码
+      tipUsr: null, // 手机号不对时提示
       tipPwd: null,
       qrActive: false,
     };
@@ -133,42 +125,23 @@ export default {
     },
     // 底下跳转按钮
     loginTo() {
-      window.cookieStore.set(
-        'uinoSystemUserInfo',
-        JSON.stringify({
-          user: 'test',
-          authority: 'test',
-        }),
-      );
-      this.$router.push('/system/meters');
-
-      // if (this.username && this.pwd) {
-      //   let postPwd = this.encodePwd(this.pwd);
-      //   login({ usr: this.username, pwd: postPwd }).then((res) => {
-      //     if (res.data.code === 200) {
-      //       let saveData = JSON.stringify(res.data.data);
-      //       window.cookieStore.set("uinoSystemUserInfo", saveData);
-      //       this.$router.push("/system/meters");
-      //     } else {
-      //       if (res.data.code === 401) {
-      //         let patternUsr = /用户名不正确$/;
-      //         let patternPwd = /密码不正确$/;
-      //         if (patternUsr.test(res.data.message)) {
-      //           this.tipUsr = "用户名错误";
-      //         }
-      //         if (patternPwd.test(res.data.message)) {
-      //           this.tipPwd = "密码错误";
-      //         }
-      //       } else {
-      //         this.tipUsr = "";
-      //         this.tipPwd = "";
-      //       }
-      //     }
-      //   });
-      // } else {
-      //   this.tipUsr = "工号不能为空";
-      //   this.tipPwd = "密码不能为空";
-      // }
+      if (process.env.VUE_APP_DEV === 'true') {
+        if (this.phone && this.password) {
+          login(this.phone, this.password).then((result) => {
+            window.cookieStore.set(
+              'DataCenter',
+              JSON.stringify({
+                user: this.phone,
+                authority: result.data.data.token,
+              }),
+            );
+            // this.$router.push('/home');
+          });
+        } else {
+          this.tipUsr = '手机不能为空';
+          this.tipPwd = '密码不能为空';
+        }
+      }
     },
   },
   mounted() {
