@@ -28,7 +28,7 @@ export default class Basic {
     return new Promise((resolve) => {
       this.scene = this.initScene();
       this.cameraPackge = new BasicCamera();
-      this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.renderer);
+      this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.camera);
       document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
       this.controls = this.createControls();
       this.addPicker();
@@ -111,14 +111,14 @@ export default class Basic {
   handlePick() {
     const curObj = this.selectedObject.object;
     console.log(this.selectedObject.object);
-    if (curObj && curObj.userData.pickble) {
-      if (this.beforeSelObj) {
-        // 恢复原来的颜色
-        Tools.queryObject(this.beforeSelObj.uuid).forEach((element) => {
+    if (this.beforeSelObj) {
+      // 恢复原来的颜色
+      Tools.queryObject(this.beforeSelObj.uuid).forEach((element) => {
         // eslint-disable-next-line no-param-reassign
-          element.material.color = this.beforeSelObj.color;
-        });
-      }
+        element.material.color = this.beforeSelObj.color;
+      });
+    }
+    if (curObj && curObj.userData.pickble) {
       if (this.beforeSelObj && this.beforeSelObj.uuid !== curObj.uuid) {
         const { x, y, z } = this.selectedObject.point;
         const point = { x: x + 3, y: y + 3, z: z + 3 };
@@ -145,13 +145,18 @@ export default class Basic {
       [this.selectedObject] = intersects;
       // 先取消hover的目标
       Tools.hideBoxHelper(this.selectedObjects[0]);
+      // Tools.hideMark(this.selectedObjects[0]);
       // 再替换
-      this.addSelectedObject(this.selectedObject.object);
+      if (!(this.selectedObjects[0] instanceof THREE.BoxHelper)) {
+        this.addSelectedObject(this.selectedObject.object);
+      }
       if (this.selectedObject.object.userData.pickble) {
-        // const { outlinePass } = this.rendererPackge;
-        // this.outlinePass.selectedObjects = this.selectedObjects;
-        Tools.showBoxHelper(this.selectedObject.object);
-        Tools.showMark(this.selectedObject.object, this.scene);
+        if (this.selectedObject.object.userData.pickble) {
+          const { outlinePass } = this.rendererPackge;
+          outlinePass.selectedObjects = this.selectedObjects;
+        }
+        // Tools.showBoxHelper(this.selectedObject.object);
+        // Tools.showMark(this.selectedObject.object, this.scene);
       }
     }
   }
