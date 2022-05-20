@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { PerspectiveCamera } from 'three';
+import { PerspectiveCamera, Vector3 } from 'three';
 import * as TWEEN from '@tweenjs/tween.js';
 import Tools from './Tools';
 
@@ -33,23 +33,32 @@ export default class BasicCamera {
   cameraFlyTo = (control, point) => {
     const controlTemp = control;
     const cloneCamera = this.camera.clone();
-    this.camera.lookAt(point);
+    // this.camera.lookAt(point);
+    // eslint-disable-next-line no-param-reassign
+    control.target = new Vector3(point.x, point.y, point.z);
     controlTemp && (controlTemp.enabled = false);
     new TWEEN.Tween(this.camera.position)
-      .to(point)
+      .to({
+        x: point.x,
+        y: point.y,
+        z: point.z,
+        rx: cloneCamera.rotation.x,
+        ry: cloneCamera.rotation.y,
+        rz: cloneCamera.rotation.z,
+      })
       .easing(TWEEN.Easing.Quadratic.Out)
       .onUpdate((v) => {
         this.camera.position.x = v.x;
         this.camera.position.y = v.y;
         this.camera.position.z = v.z;
+        this.camera.rotation.x = v.rx;
+        this.camera.rotation.y = v.ry;
+        this.camera.rotation.z = v.rz;
       }, 1000)
       .onComplete(() => {
         controlTemp && (controlTemp.enabled = true);
       })
       .start();
-    new TWEEN.Tween(this.camera.rotation)
-      .to({ x: cloneCamera.rotation.x, y: cloneCamera.rotation.y, z: cloneCamera.rotation.z }, 1000)
-      .easing(TWEEN.Easing.Back.Out).start();
     Tools.animate();
   }
 }

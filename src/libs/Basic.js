@@ -121,6 +121,7 @@ export default class Basic {
     if (curObj && curObj.userData.pickble) {
       if (this.beforeSelObj && this.beforeSelObj.uuid !== curObj.uuid) {
         const { x, y, z } = this.selectedObject.point;
+        console.log(this.selectedObject.point);
         const point = { x: x + 3, y: y + 3, z: z + 3 };
         this.cameraPackge.cameraFlyTo(this.controls, point);
       }
@@ -144,8 +145,8 @@ export default class Basic {
     if (intersects.length > 0) {
       [this.selectedObject] = intersects;
       // 先取消hover的目标
-      Tools.hideBoxHelper(this.selectedObjects[0]);
-      // Tools.hideMark(this.selectedObjects[0]);
+      // Tools.hideBoxHelper(this.selectedObjects[0]);
+      Tools.hidePanel(this.selectedObjects[0]);
       // 再替换
       if (!(this.selectedObjects[0] instanceof THREE.BoxHelper)) {
         this.addSelectedObject(this.selectedObject.object);
@@ -156,7 +157,7 @@ export default class Basic {
           outlinePass.selectedObjects = this.selectedObjects;
         }
         // Tools.showBoxHelper(this.selectedObject.object);
-        // Tools.showMark(this.selectedObject.object, this.scene);
+        Tools.showPanel(this.selectedObject.object, this.scene);
       }
     }
   }

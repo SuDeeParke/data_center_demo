@@ -20,7 +20,7 @@ export default {
       DataCenter.refcAddModle('models/aircondition/scene.gltf', {
         pickable: true,
         scale: 2,
-        arr: [22, 0, 10],
+        arr: [20, 0, 6],
       });
     });
     // const building = new Building();
