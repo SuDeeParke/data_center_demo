@@ -114,7 +114,8 @@
 </template>
 
 <script>
-import { login } from '../api/user';
+import { login, register } from '../api/user';
+import { encode } from '../utils/tools';
 
 export default {
   name: 'login',
@@ -182,7 +183,9 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          // alert('submit!');
+          console.log(this[formName]);
+          register(this[formName]);
         } else {
           console.log('error submit!!');
           return false;
@@ -208,18 +211,11 @@ export default {
       this.downIcon = !this.downIcon;
       this.qrActive = !this.qrActive;
     },
-    encodePwd(pwd) {
-      // 对字符串进行编码
-      const encode = encodeURIComponent(pwd);
-      // 对编码的字符串转化base64
-      const base64 = window.btoa(encode);
-      return base64;
-    },
     // 底下跳转按钮
     loginTo() {
       if (process.env.VUE_APP_DEV === 'true') {
         if (this.phone && this.password) {
-          login(this.phone, this.encodePwd(this.password)).then((result) => {
+          login(this.phone, encode(this.password)).then((result) => {
             window.cookieStore.set(
               'DataCenter',
               JSON.stringify({
@@ -235,6 +231,7 @@ export default {
         }
       }
     },
+
   },
   mounted() {
     window.cookieStore.set('uinoSystemUserInfo', null);
