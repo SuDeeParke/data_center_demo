@@ -2,13 +2,13 @@
   <div class="login">
     <div class="wrap" :class="qrActive?'wrap-qr-active':'wrap-input-active'">
       <!-- 左上角小图标切换 -->
-      <div class="switch-btn" @click="changeTab">
+      <div class="switch-btn" @click="changeTab()">
         <i class="iconfont-light" v-show="!downIcon">&#60314;</i>
-        <i class="iconfont-bold" v-show="downIcon">&#60475;</i>
+        <i class="iconfont-bold" v-show="downIcon">&#60447;</i>
       </div>
       <!-- 输入 -->
       <div class="login-content input-content">
-        <h1 class="login-title">后台监控管理系统</h1>
+        <h1 class="login-title">数据中心可视化运维</h1>
         <div class="switch-tab">
           <div class="login-inputall">
             <div class="login-imgmin">
@@ -44,12 +44,12 @@
             </div>
             <!-- 底下跳转 -->
             <div class="login-but">
-              <router-link to="/register">
+              <a @click="changeTab">
                 <div class="login-link">
                   <i class="iconfont-light icon">&#59845;</i>
-                  申请权限
+                  注册
                 </div>
-              </router-link>
+              </a>
               <router-link to="/resetpwd" target="_blank">
                 <div class="login-link">
                   <i class="iconfont-light icon">&#60666;</i>
@@ -58,7 +58,7 @@
               </router-link>
               <a>
                 <div class="login-link special" @click="loginTo()">
-                  login
+                  登录
                   <i class="iconfont-light icon">&#59844;</i>
                 </div>
               </a>
@@ -67,10 +67,40 @@
         </div>
       </div>
       <div class="login-content qr-content">
-        <h1 class="login-title">后台监控管理系统</h1>
+        <h1 class="login-title">数据中心可视化运维</h1>
         <div class="switch-tab">
-          <div class="QRcon">
-            <!-- <img src="../assets/svgs" /> -->
+          <div class="registerPanel">
+            <el-form
+            label-position="top"
+            ref="registerData"
+            label-width="50px"
+            :model="registerData"
+            :rules="rules"
+            >
+              <div class="registerWrap">
+                <el-form-item label="用户名" prop="name">
+                  <el-input v-model="registerData.name" maxlength="5" show-word-limit></el-input>
+                </el-form-item>
+                <el-form-item label="手机号" prop="phone">
+                  <el-input v-model="registerData.phone" type="phone" maxlength="11"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱" prop="email">
+                  <el-input v-model="registerData.email" type="email"></el-input>
+                </el-form-item>
+                <el-form-item label="密码" prop="password">
+                  <el-input v-model="registerData.password" show-password maxlength="13"></el-input>
+                </el-form-item>
+                <el-form-item label="确认密码" prop="confirm">
+                  <el-input v-model="registerData.confirm" show-password></el-input>
+                </el-form-item>
+              </div>
+              <div class="buttonArea">
+                <el-form-item>
+                  <el-button type="primary" @click="submitForm('registerData')">立即创建</el-button>
+                  <el-button @click="resetForm('registerData')">重置</el-button>
+                </el-form-item>
+              </div>
+            </el-form>
           </div>
         </div>
       </div>
@@ -89,6 +119,28 @@ import { login } from '../api/user';
 export default {
   name: 'login',
   data() {
+    const validatePass = (rule, value, callback) => {
+      const pattern = /^(?=.*[a-zA-Z])(?=.*\d).{6,13}$/;
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      } else if (!pattern.test(value)) {
+        callback(new Error('密码需包含字母,数字且长度为6-13'));
+      } else {
+        if (this.registerData.checkPass !== '') {
+          this.$refs.registerData.validateField('checkPass');
+        }
+        callback();
+      }
+    };
+    const validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.registerData.password) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    };
     return {
       bgicon: 0,
       downIcon: true,
@@ -97,10 +149,50 @@ export default {
       tipUsr: null, // 手机号不对时提示
       tipPwd: null,
       qrActive: false,
+      registerData: {
+        name: '',
+        phone: '',
+        email: '',
+        password: '',
+        confirm: '',
+      },
+      rules: {
+        name: [
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          {
+            min: 2, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur',
+          },
+        ],
+        phone: [
+          { required: true, message: '请输入手机号', trigger: 'blur' },
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { validator: validatePass, trigger: 'blur' },
+        ],
+        confirm: [
+          { required: true, message: '请输入确认密码', trigger: 'blur' },
+          { validator: validatePass2, trigger: 'blur' },
+        ],
+      },
     };
   },
 
   methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert('submit!');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+        return null;
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
     inputOnBlur() {
       this.bgicon = 0;
     },
@@ -432,18 +524,26 @@ $rotate-time: 0.7s;
   }
 }
 /* 二维码内容 */
-.QRcon {
+.registerPanel {
   width: 100%;
   height: 100%;
   background: rgb(255, 255, 255);
   z-index: 20;
-  border-radius: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s;
+  border-radius: 10px;
+  display: block;
+  padding: 10px 50px;
+  text-align: left;
+  .registerWrap {
+    height: 465px;
+    overflow-y:auto;
+  }
+  .buttonArea{
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
 }
-.QRcon > img {
+.registerPanel > img {
   width: 31.4rem;
   height: 31.4rem;
 }
