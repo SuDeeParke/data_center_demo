@@ -14,7 +14,6 @@
       <DefaultPanel v-if="sharedState.acctivePanel === '照明'"></DefaultPanel>
     </section>
     <section class="bottom">
-      {{sharedState.message}}
     </section>
   </div>
 </template>
@@ -68,13 +67,14 @@ $calcWidth: calc(100% - $leftWidth - $rightWidth);
   height: 100%;
   background: rgba($color: #000000, $alpha: 0.2);
   pointer-events: none;
+  z-index: 100;
   section{
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba($color: #000, $alpha: 0);
-    backdrop-filter: blur(10px);
+    // background: rgba($color: #000, $alpha: 0);
+    // backdrop-filter: blur(0);
     border-radius: 10px;
     pointer-events: all;
   }
