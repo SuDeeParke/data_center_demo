@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 import {
   Button, Switch, Slider, Radio, RadioGroup,
 } from 'element-ui';
@@ -16,6 +18,8 @@ Vue.use(Button);
 Vue.use(Radio);
 Vue.use(Switch);
 Vue.use(Slider);
+Vue.use(VueAxios, axios);
+
 new Vue({
   router,
   render: (h) => h(App),

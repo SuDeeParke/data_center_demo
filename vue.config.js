@@ -17,4 +17,16 @@ module.exports = {
         .end();
     });
   },
+  devServer: {
+    proxy: {
+      '/basic_api': {
+        target: 'http://127.0.0.1:8088',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/basic_api': '',
+        },
+      },
+    },
+  },
 };
