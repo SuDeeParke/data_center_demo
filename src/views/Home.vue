@@ -15,7 +15,6 @@ export default {
 };
 </script>
 
-    Interface
 <style lang="scss" scoped>
 
 </style>
