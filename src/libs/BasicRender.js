@@ -33,7 +33,7 @@ export default class BasicRender {
 
   createComposer(scene, camera) {
     this.composer = new EffectComposer(this.renderer);
-    if (this.scene && this.camera) {
+    if (scene && camera) {
       const renderPass = new RenderPass(scene, camera);
       this.composer.addPass(renderPass);
       // this.addOutlineEffect(scene, camera);
