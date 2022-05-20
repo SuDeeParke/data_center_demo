@@ -50,7 +50,7 @@
                   注册
                 </div>
               </a>
-              <router-link to="/resetpwd" target="_blank">
+              <router-link to="/noserver" >
                 <div class="login-link">
                   <i class="iconfont-light icon">&#60666;</i>
                   <br />忘记密码
@@ -255,7 +255,7 @@ $rotate-time: 0.7s;
   width: 100%;
   min-width: 1280px;
   height: 100%;
-  background: #fff;
+  background: #eee;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -305,7 +305,7 @@ $rotate-time: 0.7s;
     position: absolute;
     top: 0;
     z-index: 19;
-    background: #fff;
+    background: #fdfdfd;
     cursor: pointer;
     height: 15rem;
     width: 10rem;
@@ -405,7 +405,7 @@ $rotate-time: 0.7s;
   width: 50rem;
   position: relative;
   z-index: 20;
-  background: rgb(255, 255, 255);
+  background:#fdfdfd;
   margin-left: auto;
   margin-right: auto;
   font-size: 1.4rem;
@@ -437,7 +437,7 @@ $rotate-time: 0.7s;
 }
 .login-imgmin {
   width: 100%;
-  background: rgb(255, 255, 255);
+  background: #fdfdfd;
   padding: 1rem 0;
   display: flex;
   justify-content: center;
@@ -458,7 +458,7 @@ $rotate-time: 0.7s;
 }
 /* 输入框 */
 .login-inputall {
-  background: rgb(255, 255, 255);
+  background: #fdfdfd;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -479,6 +479,7 @@ $rotate-time: 0.7s;
     color: #0c79f8;
     font-size: 2rem;
     border-bottom: 0.3rem solid #eee;
+    background-color: #fdfdfd;
     padding: 5px 0;
     margin-bottom: 0.5rem;
     transition: all 0.2s;
@@ -524,7 +525,7 @@ $rotate-time: 0.7s;
 .registerPanel {
   width: 100%;
   height: 100%;
-  background: rgb(255, 255, 255);
+  background: #fdfdfd;
   z-index: 20;
   border-radius: 10px;
   display: block;
