@@ -57,7 +57,7 @@ export default class Tools {
           // 配置拾取
           // const pattern = /^Obj3d66/;
           if (/^JiGui/.test(objName)) {
-            childTemp.material = childTemp.material.clone();
+            // childTemp.material = childTemp.material.clone();
             childTemp.userData.pickble = true;
           } else {
             childTemp.userData.pickble = false;

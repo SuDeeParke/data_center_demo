@@ -45,7 +45,7 @@ export default class Basic {
     const light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(20, 20, 20);
     scene.add(light);
-    const ambientLight = new THREE.AmbientLight(0xf5f5f5);
+    const ambientLight = new THREE.AmbientLight(0xeeeeee);
     scene.add(ambientLight);
     process.env.VUE_APP_DEV === 'true' ? console.log('测试模式场景初始化完成！') : console.log('欢迎来到数据中心可视化系统！');
     return scene;
