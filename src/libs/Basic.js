@@ -39,12 +39,13 @@ export default class Basic {
 
   initScene = () => {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x155461);
+    // scene.background = new THREE.Color(0x155461);
+    scene.add(Tools.createSkyBox('models/texture/bak7', '', 'jpg'));
     // 灯光
     const light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(20, 20, 20);
     scene.add(light);
-    const ambientLight = new THREE.AmbientLight(0xcccccc);
+    const ambientLight = new THREE.AmbientLight(0xf5f5f5);
     scene.add(ambientLight);
     process.env.VUE_APP_DEV === 'true' ? console.log('测试模式场景初始化完成！') : console.log('欢迎来到数据中心可视化系统！');
     return scene;

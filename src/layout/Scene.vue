@@ -11,7 +11,7 @@ export default {
   mounted() {
     const DataCenter = new Basic();
     DataCenter.init('scene').then(() => {
-      DataCenter.addModle('models/data_center_full/JiFang.gltf', 'gltf');
+      DataCenter.addModle('models/data_center_empty/JiFang.gltf', 'gltf');
     });
     // const building = new Building();
     // building.init(DataCenter.scene, 'models/office_building/scene.gltf');

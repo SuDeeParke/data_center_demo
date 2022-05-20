@@ -28,7 +28,7 @@ body {
   height: 100%;
 }
 :root{
-  --panel-bg-color: rgba(255,255,255,0.8);
+  --panel-bg-color: rgba(255,255,255,0.65);
   --theme-color: #337ab7;
 }
 

@@ -191,4 +191,31 @@ export default class Tools {
       });
     }
   }
+
+  static createSkyBox(path, name, format) {
+    // ['px-right', 'nx-left', 'py-up', 'ny.dn', 'pz-back', 'nz-font', ]
+    const direction = [
+      `${path}/${name}right.${format}`,
+      `${path}/${name}left.${format}`,
+      `${path}/${name}top.${format}`,
+      `${path}/${name}down.${format}`,
+      `${path}/${name}back.${format}`,
+      `${path}/${name}front.${format}`,
+    ];
+    const loader = new THREE.TextureLoader();
+    // 创建盒子，并设置盒子的大小为( 5000, 5000, 5000 )
+    const skyGeometry = new THREE.BoxGeometry(5000, 5000, 5000);
+    // 设置盒子材质
+    const materialArray = [];
+    for (let i = 0; i < 6; i += 1) {
+      materialArray.push(
+        new THREE.MeshBasicMaterial({
+          map: loader.load(direction[i]), // 将图片纹理贴上
+          side: THREE.BackSide, // 镜像翻转
+        }),
+      );
+    }
+    // 创建一个完整的天空盒，填入几何模型和材质的参数
+    return new THREE.Mesh(skyGeometry, materialArray);
+  }
 }
