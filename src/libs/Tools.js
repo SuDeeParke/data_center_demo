@@ -200,16 +200,19 @@ export default class Tools {
     // 用canvas生成图片
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = 100;
-    canvas.height = 50;
+    canvas.width = 1280;
+    canvas.height = 960;
     // 制作矩形
-    ctx.fillStyle = 'rgba(255, 255, 255,0.8)';
-    ctx.fillRect(0, 0, 100, 50);
+    ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+    ctx.fillRect(0, 0, 1280, 960);
     // 设置文字
     ctx.fillStyle = '#222';
-    ctx.font = 'normal 20pt "楷体"';
+    ctx.font = 'normal 100pt "楷体"';
     // 文字换行
-    ctx.fillText('textword', 15, 35);
+    ctx.fillText('id:asda231', 150, 200);
+    ctx.fillText('type:asda', 150, 550);
+    ctx.fillText('desc:asdasdhjavs', 150, 750);
+
     // 生成图片
     const url = canvas.toDataURL('image/png');
     const map = new THREE.TextureLoader().load(url);
@@ -217,13 +220,24 @@ export default class Tools {
       map,
       transparent: false,
     });
-    // 创建精灵模型对象，不需要几何体geometry参数
-    const sprite = new THREE.Sprite(spriteMaterial);
-    sprite.scale.set(2, 2, 2); // 精灵图大小
-    sprite.translateY(50);
-    // sprite.position.set(...obj.parent.parent.position);
-    sprite.position.set(obj.userData.position);
-    scene.add(sprite);
+    if (!obj.userData.panel) {
+      const panel = new THREE.Sprite(spriteMaterial);
+      panel.scale.set(4, 4, 4); // 精灵图大小
+      panel.translateY(50);
+      panel.position.set(obj.userData.position[0], 10, obj.userData.position[2]);
+      // eslint-disable-next-line no-param-reassign
+      obj.userData.panel = panel;
+      scene.add(panel);
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      obj.userData.panel.visible = true;
+    }
+  }
+
+  static hidePanel = (obj) => {
+    if (obj instanceof THREE.Mesh && obj.userData.panel) {
+      obj.userData.panel.visible = false;
+    }
   }
 
   static showMark = (obj, scene) => {
