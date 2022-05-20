@@ -66,7 +66,7 @@ export default class BasicRender {
     // 虚化
     outlinePass.edgeThickness = 1;
     // 没有被遮挡的颜色
-    outlinePass.visibleEdgeColor.set('#ffca28');
+    outlinePass.visibleEdgeColor.set('#0x00ffff');
     // 被遮挡部分的颜色
     outlinePass.hiddenEdgeColor.set('#ffffff');
     // 是否使用父级的材质
