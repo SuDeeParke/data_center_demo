@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Scene from '../components/Scene.vue';
+import Scene from '../layout/Scene.vue';
 import Interface from '../layout/Interface.vue';
 
 export default {
