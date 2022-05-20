@@ -1,0 +1,11 @@
+Model Information:
+* title:	Aircondition
+* source:	https://sketchfab.com/3d-models/aircondition-ae26f37f22404719807b2e6f3b812606
+* author:	PiyalakNuchim (https://sketchfab.com/PiyalakNuchim)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Aircondition" (https://sketchfab.com/3d-models/aircondition-ae26f37f22404719807b2e6f3b812606) by PiyalakNuchim (https://sketchfab.com/PiyalakNuchim) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

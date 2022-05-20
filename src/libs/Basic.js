@@ -86,6 +86,12 @@ export default class Basic {
     return obj;
   }
 
+  refcAddModle = async (addr, option) => {
+    const obj = await Tools.refcLoadGltfModle(addr, option);
+    this.scene.add(obj);
+    return obj;
+  }
+
   addPicker() {
     this.raycaster = new THREE.Raycaster();
     this.pointer = new THREE.Vector2();
@@ -128,6 +134,9 @@ export default class Basic {
     }
   }
 
+  /**
+   * @description 物体拾取检查
+   */
   checkIntersection() {
     const { camera } = this.cameraPackge;
     this.raycaster.setFromCamera(this.pointer, camera);
@@ -141,8 +150,8 @@ export default class Basic {
       if (this.selectedObject.object.userData.pickble) {
         // const { outlinePass } = this.rendererPackge;
         // this.outlinePass.selectedObjects = this.selectedObjects;
-        // Tools.showBoxHelper(this.selectedObject.object);
-        Tools.showPanel(this.selectedObject.object, this.scene);
+        Tools.showBoxHelper(this.selectedObject.object);
+        Tools.showMark(this.selectedObject.object, this.scene);
       }
     }
   }

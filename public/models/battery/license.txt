@@ -1,0 +1,11 @@
+Model Information:
+* title:	Battery 12v DC
+* source:	https://sketchfab.com/3d-models/battery-12v-dc-4f2331084ef24a759580091ff7575fc0
+* author:	Dmitriy Mitroshin (https://sketchfab.com/LtxxwSibeRia)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Battery 12v DC" (https://sketchfab.com/3d-models/battery-12v-dc-4f2331084ef24a759580091ff7575fc0) by Dmitriy Mitroshin (https://sketchfab.com/LtxxwSibeRia) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

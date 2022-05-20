@@ -12,6 +12,11 @@ export default {
     const DataCenter = new Basic();
     DataCenter.init('scene').then(() => {
       DataCenter.addModle('models/data_center_empty/JiFang.gltf', 'gltf');
+      DataCenter.refcAddModle('models/aircondition/scene.gltf', {
+        pickable: true,
+        scale: 2,
+        arr: [10, 0, 10],
+      });
     });
     // const building = new Building();
     // building.init(DataCenter.scene, 'models/office_building/scene.gltf');
@@ -35,5 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+#scene{
+  user-select: none;
+}
 </style>

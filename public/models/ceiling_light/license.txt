@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ceiling Light
+* source:	https://sketchfab.com/3d-models/ceiling-light-2383bb4ec3e841a5b8d4eb8bad979486
+* author:	Kira (https://sketchfab.com/kiratronic)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ceiling Light" (https://sketchfab.com/3d-models/ceiling-light-2383bb4ec3e841a5b8d4eb8bad979486) by Kira (https://sketchfab.com/kiratronic) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
