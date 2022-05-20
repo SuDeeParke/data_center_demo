@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-lonely-if */
 import * as TWEEN from '@tweenjs/tween.js';
@@ -72,6 +73,48 @@ export default class Tools {
     });
   })
 
+  static refcLoadGltfModle = (addr, option) => new Promise((resolve, reject) => {
+    const { pickable, scale, arr } = option;
+    const loader = new GLTFLoader();
+    // 配置gltf解码器
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('../assets/draco/gltf');
+    dracoLoader.setDecoderConfig({ type: 'js' });
+    loader.setDRACOLoader(dracoLoader);
+    loader.load(addr, (gltf) => {
+    // const gltfTemp = gltf;
+      const { scene } = gltf;
+      if (scale) {
+        scene.scale.set(scale, scale, scale);
+      }
+      if (arr) {
+        scene.position.x += arr[0];
+        scene.position.y += arr[1];
+        scene.position.z += arr[2];
+      }
+      // 加工处理 pickable
+      scene.traverse((child) => {
+        const childTemp = child;
+        if (childTemp instanceof THREE.Mesh) {
+          if (pickable) {
+            childTemp.material = childTemp.material.clone();
+            childTemp.userData.pickble = true;
+            childTemp.userData.scale = scale;
+            childTemp.userData.position = arr;
+            childTemp.userData.sprite = null;
+            childTemp.userData.boxHelper = null;
+            childTemp.userData.panel = null;
+          }
+        }
+      });
+      resolve(scene);
+    }, undefined, (error) => {
+    // eslint-disable-next-line no-console
+      console.error(error);
+      reject(error);
+    });
+  })
+
   // 获取模型适合观察的缩放的比例
   static getFitScaleValue = (obj) => {
     const boxHelper = new THREE.BoxHelper(obj);
@@ -129,21 +172,21 @@ export default class Tools {
   }
 
   static showBoxHelper = (obj) => {
-    const boxHelps = obj && obj.children.filter((item) => item instanceof THREE.BoxHelper);
-    if (boxHelps && boxHelps.length === 0) {
-      const boxHelp = new THREE.BoxHelper(obj, '#00ffff');
-      boxHelp.material.depthTest = false;
-      boxHelp.material.linewidth = 10;
-      obj.attach(boxHelp);
-    } else {
-      boxHelps.forEach((item) => {
-        // eslint-disable-next-line no-param-reassign
-        item.visible = true;
-      });
+    if (obj instanceof THREE.Mesh && !obj.userData.boxHelper) {
+      const boxHelper = new THREE.BoxHelper(obj, '#00ffff');
+      boxHelper.material.depthTest = false;
+      boxHelper.material.linewidth = 10;
+      obj.attach(boxHelper);
+      // eslint-disable-next-line no-param-reassign
+      obj.userData.boxHelper = boxHelper;
+      // eslint-disable-next-line no-param-reassign
+      obj.userData.boxHelper.userData.test = 'test';
     }
   }
 
   static hideBoxHelper = (obj) => {
+    // window.DataCenter.scene.remove(window.DataCenter.scene.getObjectById(obj.uuid));
+
     const boxHelps = obj && obj.children.filter((item) => item instanceof THREE.BoxHelper);
     if (boxHelps && boxHelps.length !== 0) {
       boxHelps.forEach((item) => {
@@ -171,24 +214,42 @@ export default class Tools {
     const url = canvas.toDataURL('image/png');
     const map = new THREE.TextureLoader().load(url);
     const spriteMaterial = new THREE.SpriteMaterial({
-      map, // 设置精灵纹理贴图
-      transparent: true, // 开启透明(纹理图片png有透明信息)
+      map,
+      transparent: false,
     });
     // 创建精灵模型对象，不需要几何体geometry参数
     const sprite = new THREE.Sprite(spriteMaterial);
-    sprite.scale.set(1, 1, 1); // 精灵图大小
+    sprite.scale.set(2, 2, 2); // 精灵图大小
     sprite.translateY(50);
-    sprite.position.set(...obj.parent.parent.position);
+    // sprite.position.set(...obj.parent.parent.position);
+    sprite.position.set(obj.userData.position);
     scene.add(sprite);
   }
 
-  static hideBoxHelper = (obj) => {
-    const sprites = obj && obj.children.filter((item) => item instanceof THREE.BoxHelper);
-    if (sprites && sprites.length !== 0) {
-      sprites.forEach((item) => {
-        // eslint-disable-next-line no-param-reassign
-        item.visible = false;
-      });
+  static showMark = (obj, scene) => {
+    const url = ('http://localhost:8080/src/img/marker.png');
+    const map = new THREE.TextureLoader().load(url);
+    const spriteMaterial = new THREE.SpriteMaterial({
+      map, // 设置精灵纹理贴图
+      transparent: true, // 开启透明(纹理图片png有透明信息)
+    });
+    if (!obj.userData.sprite) {
+      const sprite = new THREE.Sprite(spriteMaterial);
+      sprite.scale.set(1, 1, 1); // 精灵图大小
+      sprite.translateY(50);
+      sprite.position.set(obj.userData.position[0], 10, obj.userData.position[2]);
+      // eslint-disable-next-line no-param-reassign
+      obj.userData.sprite = sprite;
+      scene.add(sprite);
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      obj.userData.sprite.visible = true;
+    }
+  }
+
+  static hideMark = (obj) => {
+    if (obj instanceof THREE.Mesh && obj.userData.sprite) {
+      obj.userData.sprite.visible = false;
     }
   }
 
