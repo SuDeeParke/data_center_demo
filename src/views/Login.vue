@@ -96,7 +96,7 @@
               </div>
               <div class="buttonArea">
                 <el-form-item>
-                  <el-button type="primary" @click="submitForm('registerData')">立即创建</el-button>
+                  <el-button type="primary" @click="submitForm('registerData')">立即注册</el-button>
                   <el-button @click="resetForm('registerData')">重置</el-button>
                 </el-form-item>
               </div>
@@ -210,7 +210,7 @@ export default {
     },
     encodePwd(pwd) {
       // 对字符串进行编码
-      const encode = encodeURI(pwd);
+      const encode = encodeURIComponent(pwd);
       // 对编码的字符串转化base64
       const base64 = window.btoa(encode);
       return base64;
@@ -219,7 +219,7 @@ export default {
     loginTo() {
       if (process.env.VUE_APP_DEV === 'true') {
         if (this.phone && this.password) {
-          login(this.phone, this.password).then((result) => {
+          login(this.phone, this.encodePwd(this.password)).then((result) => {
             window.cookieStore.set(
               'DataCenter',
               JSON.stringify({
@@ -227,7 +227,7 @@ export default {
                 authority: result.data.data.token,
               }),
             );
-            // this.$router.push('/home');
+            this.$router.push('/home');
           });
         } else {
           this.tipUsr = '手机不能为空';
