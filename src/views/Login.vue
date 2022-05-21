@@ -531,9 +531,12 @@ $rotate-time: 0.7s;
   display: block;
   padding: 10px 50px;
   text-align: left;
+  @include customScroll;
+
   .registerWrap {
     height: 465px;
     overflow-y:auto;
+    @include customScroll;
   }
   .buttonArea{
       display: flex;
