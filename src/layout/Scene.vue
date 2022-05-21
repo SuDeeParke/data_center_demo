@@ -12,6 +12,7 @@ export default {
     const DataCenter = new Basic();
     DataCenter.init('scene').then(() => {
       DataCenter.addModle('models/data_center_empty/JiFang.gltf', 'gltf');
+
       DataCenter.refcAddModle('models/aircondition/scene.gltf', {
         pickable: true,
         scale: 2,
@@ -21,6 +22,26 @@ export default {
         pickable: true,
         scale: 2,
         arr: [20, 0, 6],
+      });
+      DataCenter.refcAddModle('models/server_console/scene.gltf', {
+        pickable: true,
+        scale: 1,
+        arr: [10, 0, 6],
+      });
+      DataCenter.refcAddModle('models/ceiling_light/scene.gltf', {
+        pickable: true,
+        scale: 0.2,
+        arr: [0, 10, 6],
+      });
+      DataCenter.refcAddModle('models/ceiling_light/scene.gltf', {
+        pickable: true,
+        scale: 0.2,
+        arr: [-15, 10, 6],
+      });
+      DataCenter.refcAddModle('models/ceiling_light/scene.gltf', {
+        pickable: true,
+        scale: 0.2,
+        arr: [15, 10, 6],
       });
     });
     // const building = new Building();
