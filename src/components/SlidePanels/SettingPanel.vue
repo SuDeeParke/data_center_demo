@@ -14,6 +14,17 @@
           </el-switch>
         </div>
       </InfoPanel>
+      <InfoPanel title="天空盒子">
+
+      </InfoPanel>
+      <InfoPanel title="主题色">
+
+      </InfoPanel>
+      <InfoPanel title="用户">
+        <div class="flex-wrap">
+          <el-button type="danger">退出</el-button>
+        </div>
+      </InfoPanel>
     </div>
 
   </div>

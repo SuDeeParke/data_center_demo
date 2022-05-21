@@ -209,9 +209,11 @@ export default class Tools {
     ctx.fillStyle = '#222';
     ctx.font = 'normal 100pt "楷体"';
     // 文字换行
-    ctx.fillText('id:asda231', 150, 200);
-    ctx.fillText('type:asda', 150, 550);
-    ctx.fillText('desc:asdasdhjavs', 150, 750);
+    if (obj.userData.info) {
+      ctx.fillText(obj.userData.info.id, 150, 200);
+      ctx.fillText(obj.userData.info.type, 150, 550);
+      ctx.fillText(obj.userData.info.desc, 150, 750);
+    }
 
     // 生成图片
     const url = canvas.toDataURL('image/png');
@@ -224,7 +226,11 @@ export default class Tools {
       const panel = new THREE.Sprite(spriteMaterial);
       panel.scale.set(4, 4, 4); // 精灵图大小
       panel.translateY(50);
-      panel.position.set(obj.userData.position[0], 10, obj.userData.position[2]);
+      panel.position.set(
+        obj.userData.position[0],
+        obj.userData.position[1] + 10,
+        obj.userData.position[2],
+      );
       // eslint-disable-next-line no-param-reassign
       obj.userData.panel = panel;
       scene.add(panel);

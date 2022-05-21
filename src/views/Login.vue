@@ -184,10 +184,8 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // alert('submit!');
-          console.log(this[formName]);
           register(this[formName]);
         } else {
-          console.log('error submit!!');
           return false;
         }
         return null;

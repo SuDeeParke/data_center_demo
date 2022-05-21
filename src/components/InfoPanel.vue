@@ -20,11 +20,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+// *{
+//   padding: 0;
+//   margin: 0;
+//   box-sizing: border-box;
+// }
 .info-panel{
   position: relative;
   display: block;
