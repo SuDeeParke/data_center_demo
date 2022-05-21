@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { showDeviceMark, hideDeviceMark } from '@/utils/tools';
+
 export default {
   name: 'Menu',
   data() {
@@ -23,6 +25,7 @@ export default {
         {
           name: '机柜',
           class: 'icon-jiguihang',
+          query: 'cabints',
         },
         {
           name: '蓄电池',
@@ -31,10 +34,12 @@ export default {
         {
           name: '空调',
           class: 'icon-kongtiao',
+          query: 'airs',
         },
         {
           name: '照明',
           class: 'icon-zhaoming',
+          query: 'lights',
         },
         {
           name: '设置',
@@ -48,6 +53,8 @@ export default {
     handleClick(cur) {
       this.activeButton = cur.name;
       this.$store.state.acctivePanel = cur.name;
+      hideDeviceMark();
+      showDeviceMark(cur.query);
     },
   },
   mounted() {

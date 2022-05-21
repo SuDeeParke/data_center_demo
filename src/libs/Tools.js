@@ -105,6 +105,16 @@ export default class Tools {
             childTemp.userData.boxHelper = null;
             childTemp.userData.panel = null;
             childTemp.userData.info = { ...option.info };
+            const { type } = childTemp.userData.info;
+            if (window.DataCenter && window.DataCenter.lights && type === 'Light') {
+              window.DataCenter.lights.push(childTemp);
+            }
+            if (window.DataCenter && window.DataCenter.cabints && type === 'Cabinet') {
+              window.DataCenter.cabints.push(childTemp);
+            }
+            if (window.DataCenter && window.DataCenter.airs && type === 'AirCondition') {
+              window.DataCenter.airs.push(childTemp);
+            }
           }
         }
       });

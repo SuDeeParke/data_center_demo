@@ -10,6 +10,10 @@ export default {
   name: 'Scene',
   mounted() {
     const DataCenter = new Basic();
+    DataCenter.lights = [];
+    DataCenter.cabints = [];
+    DataCenter.airs = [];
+
     DataCenter.init('scene').then(() => {
       if (process.env.VUE_APP_DEV === 'true') {
         DataCenter.addModle('models/data_center_empty/JiFang.gltf', 'gltf');
