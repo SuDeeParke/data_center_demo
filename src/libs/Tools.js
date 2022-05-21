@@ -104,6 +104,7 @@ export default class Tools {
             childTemp.userData.sprite = null;
             childTemp.userData.boxHelper = null;
             childTemp.userData.panel = null;
+            childTemp.userData.info = { ...option.info };
           }
         }
       });
