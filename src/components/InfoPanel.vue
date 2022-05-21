@@ -32,13 +32,14 @@ export default {
   height: auto;
   min-height: 100px;
   border-radius: 10px;
-  background-color: rgba($color: #fff, $alpha: 0.8);
+  background-color: var(--panel-bg-color);
   backdrop-filter: blur(5px);
   box-shadow: 0 0 5px 2px rgba($color: #000, $alpha: 0.1);
   margin-bottom: 20px;
   border-right: 5px solid var(--theme-color);
   overflow: hidden;
   transition: all 0.3s ease-out;
+  padding-bottom: 20px;
   // &::before{
   //   content: '';
   //   display: block;

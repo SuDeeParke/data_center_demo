@@ -27,9 +27,11 @@ body {
   color: #2c3e50;
   height: 100%;
 }
-:root{
-  --panel-bg-color: rgba(255,255,255,0.65);
-  --theme-color: #337ab7;
+:root.light{
+ @include light;
+}
+:root.dark{
+  @include dark;
 }
 
 </style>

@@ -34,10 +34,11 @@ export default {
   background: var(--panel-bg-color);
   backdrop-filter: blur(10px);
   border-bottom: 2px solid var(--theme-color);
+  transition: all .4s;
   a {
     display: inline-block;
     text-decoration: none;
-    color: #222;
+    color: var(--font-color);
     font-size: 23px;
     font-family: 'sans-serif';
     cursor: pointer;

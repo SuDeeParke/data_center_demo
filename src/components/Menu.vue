@@ -67,6 +67,7 @@ $selectedShadow: 2px 2px 5px 2px rgba($color: #000, $alpha: 0.3);
   border-radius: 0;
   border-top-right-radius: 10px;
   border-end-end-radius: 10px;
+  transition: all .4s;
   button.basic-button {
     display: block;
     width: 60px;
@@ -79,7 +80,7 @@ $selectedShadow: 2px 2px 5px 2px rgba($color: #000, $alpha: 0.3);
     margin-bottom: 20px;
     cursor: pointer;
     transition: all 0.3s;
-    background-color: #eee;
+    background-color: var(--panel-bg-color);
     &:hover{
     //  box-shadow: inset $selectedShadow;
       i{
@@ -87,6 +88,7 @@ $selectedShadow: 2px 2px 5px 2px rgba($color: #000, $alpha: 0.3);
       }
     }
     i{
+      color: var(--font-color);
       font-size: 30px;
       transition: all 0.3s;
     }
@@ -99,7 +101,7 @@ $selectedShadow: 2px 2px 5px 2px rgba($color: #000, $alpha: 0.3);
     box-shadow: inset $selectedShadow;
     transition: all 0.3s;
     i{
-        color: #337ab7;
+        color: var(--theme-color);
     }
   }
 }

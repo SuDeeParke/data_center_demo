@@ -43,6 +43,9 @@ export default {
     SettingPanel,
     DefaultPanel,
   },
+  mounted() {
+    document.documentElement.classList.add('light');
+  },
 };
 </script>
 

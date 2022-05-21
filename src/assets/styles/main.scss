@@ -39,6 +39,8 @@
   border-end-start-radius: 10px;
   padding-bottom: 20px;
   box-sizing: border-box;
+  transition: all 0.4s;
+  color: var(--font-color);
     @include customScroll;
 
     &:hover{
@@ -92,4 +94,16 @@
       background-color: darken($color, 5%);
     }
   }
+}
+
+@mixin light {
+  --panel-bg-color: rgba(255, 255, 255, 0.65);
+  --font-color: #232323;
+  --theme-color: #337ab7;
+}
+
+@mixin dark {
+  --panel-bg-color: rgba(25, 25, 25, 0.65);
+  --font-color: #fafafa;
+  --theme-color: #33b758;
 }

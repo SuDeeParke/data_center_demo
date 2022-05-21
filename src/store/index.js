@@ -3,6 +3,7 @@ const store = {
   state: {
     message: 'Hello!',
     acctivePanel: 'Default',
+    dark: false,
   },
   setMessageAction(newValue) {
     if (this.debug) {
