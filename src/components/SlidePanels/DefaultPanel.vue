@@ -13,11 +13,15 @@
       <InfoPanel title="机柜可用容量">
         <div class="info"><span class="value">567</span><span class="unit"> u</span></div>
       </InfoPanel>
+      <!-- <InfoPanel title="机柜可用容量">
+        <LineTimeMulti></LineTimeMulti>
+      </InfoPanel> -->
     </div>
   </div>
 </template>
 
 <script>
+// import LineTimeMulti from '../charts/LineTimeMulti.vue';
 import InfoPanel from '../InfoPanel.vue';
 
 export default {
