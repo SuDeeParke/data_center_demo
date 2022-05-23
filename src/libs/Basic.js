@@ -24,9 +24,9 @@ export default class Basic {
     process.env.VUE_APP_DEV === 'true' ? window.THREE = THREE : null;
   }
 
-  init(domID) {
+  init(domID, skyBox) {
     return new Promise((resolve) => {
-      this.scene = this.initScene();
+      this.scene = this.initScene(skyBox);
       this.cameraPackge = new BasicCamera();
       this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.camera);
       document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
@@ -37,10 +37,10 @@ export default class Basic {
     });
   }
 
-  initScene = () => {
+  initScene = (skyBox) => {
     const scene = new THREE.Scene();
     // scene.background = new THREE.Color(0x155461);
-    scene.add(Tools.createSkyBox('models/texture/bak7', '', 'jpg'));
+    scene.add(Tools.createSkyBox('models/texture', skyBox, 'jpg'));
     // 灯光
     const light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(20, 20, 20);
@@ -48,6 +48,7 @@ export default class Basic {
     const ambientLight = new THREE.AmbientLight(0xeeeeee);
     ambientLight.position.set(0, 0, 20);
     scene.add(ambientLight);
+
     process.env.VUE_APP_DEV === 'true' ? console.log('测试模式场景初始化完成！') : console.log('欢迎来到数据中心可视化系统！');
     return scene;
   }

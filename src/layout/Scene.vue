@@ -4,17 +4,24 @@
 
 <script>
 import Basic from '@/libs/Basic';
+import Tools from '../libs/Tools';
 // import Building from '@/libs/Building';
 
 export default {
   name: 'Scene',
+  data() {
+    return {
+      skyBox: 'bak7',
+      sharedState: this.$store.state,
+    };
+  },
   mounted() {
     const DataCenter = new Basic();
     DataCenter.lights = [];
     DataCenter.cabints = [];
     DataCenter.airs = [];
 
-    DataCenter.init('scene').then(() => {
+    DataCenter.init('scene', this.sharedState.skyBox).then(() => {
       if (process.env.VUE_APP_DEV === 'true') {
         DataCenter.addModle('models/data_center_empty/JiFang.gltf', 'gltf');
         DataCenter.refcAddModle('models/aircondition/scene.gltf', {
@@ -98,6 +105,23 @@ export default {
       DataCenter.checkIntersection();
     });
     window.DataCenter = DataCenter;
+  },
+  methods: {
+    changeSkyBox(newV) {
+      if (window.DataCenter) {
+        const { scene } = window.DataCenter;
+        scene.remove(scene.getChildByName('skyBox'));
+        scene.add(Tools.createSkyBox('models/texture', newV, 'jpg'));
+      }
+    },
+  },
+  watch: {
+    'sharedState.skyBox': {
+      handler(newV) {
+        this.changeSkyBox(newV);
+      },
+      immediate: true,
+    },
   },
 };
 </script>

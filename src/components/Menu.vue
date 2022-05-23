@@ -52,13 +52,13 @@ export default {
   methods: {
     handleClick(cur) {
       this.activeButton = cur.name;
-      this.$store.state.acctivePanel = cur.name;
+      this.sharedState.acctivePanel = cur.name;
       hideDeviceMark();
       showDeviceMark(cur.query);
     },
   },
   mounted() {
-    this.$store.state.acctivePanel = this.activeButton;
+    this.sharedState.acctivePanel = this.activeButton;
   },
 };
 </script>

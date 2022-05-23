@@ -15,7 +15,14 @@
         </div>
       </InfoPanel>
       <InfoPanel title="天空盒子">
-
+        <el-select v-model="skyBox" placeholder="请选择">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
       </InfoPanel>
       <InfoPanel title="主题色">
 
@@ -38,15 +45,29 @@ export default {
   data() {
     return {
       dark: false,
+      options: [{
+        value: 'bak4',
+        label: '纯净',
+      }, {
+        value: 'bak5',
+        label: '彩云',
+      }, {
+        value: 'bak6',
+        label: '山清水秀',
+      }, {
+        value: 'bak7',
+        label: '默认',
+      }],
+      skyBox: 'bak7',
       sharedState: this.$store.state,
     };
   },
   mounted() {
-    this.dark = this.$store.state.dark;
+    this.dark = this.sharedState.dark;
   },
   watch: {
     dark(newV) {
-      this.$store.state.dark = newV;
+      this.sharedState.dark = newV;
       if (newV) {
         document.documentElement.classList.remove('light');
         document.documentElement.classList.add('dark');
@@ -55,7 +76,12 @@ export default {
         document.documentElement.classList.add('light');
       }
     },
+    skyBox(newV) {
+      this.sharedState.skyBox = newV;
+      window.cookieStore.set('skyBox', newV);
+    },
   },
+
 };
 </script>
 

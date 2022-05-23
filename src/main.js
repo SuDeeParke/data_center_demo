@@ -10,6 +10,8 @@ import {
   Form,
   FormItem,
   Input,
+  Select,
+  Option,
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/styles/iconfont.css';
@@ -23,7 +25,9 @@ Vue.config.productionTip = false;
 Vue.use(RadioGroup);
 Vue.use(Button);
 Vue.use(Radio);
+Vue.use(Select);
 Vue.use(Switch);
+Vue.use(Option);
 Vue.use(Slider);
 Vue.use(Form);
 Vue.use(FormItem);

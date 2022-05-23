@@ -285,14 +285,14 @@ export default class Tools {
   }
 
   static createSkyBox(path, name, format) {
-    // ['px-right', 'nx-left', 'py-up', 'ny.dn', 'pz-back', 'nz-font', ]
+    // ['px：right', 'nx：left', 'py：up', 'ny：dn', 'pz：back', 'nz：front', ]
     const direction = [
-      `${path}/${name}right.${format}`,
-      `${path}/${name}left.${format}`,
-      `${path}/${name}top.${format}`,
-      `${path}/${name}down.${format}`,
-      `${path}/${name}back.${format}`,
-      `${path}/${name}front.${format}`,
+      `${path}/${name}/right.${format}`,
+      `${path}/${name}/left.${format}`,
+      `${path}/${name}/top.${format}`,
+      `${path}/${name}/down.${format}`,
+      `${path}/${name}/back.${format}`,
+      `${path}/${name}/front.${format}`,
     ];
     const loader = new THREE.TextureLoader();
     // 创建盒子，并设置盒子的大小为( 5000, 5000, 5000 )
@@ -307,7 +307,10 @@ export default class Tools {
         }),
       );
     }
+    const mesh = new THREE.Mesh(skyGeometry, materialArray);
+    mesh.name = 'skyBox';
+    console.log(mesh);
     // 创建一个完整的天空盒，填入几何模型和材质的参数
-    return new THREE.Mesh(skyGeometry, materialArray);
+    return mesh;
   }
 }
