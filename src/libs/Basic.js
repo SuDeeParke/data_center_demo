@@ -37,12 +37,13 @@ export default class Basic {
     });
   }
 
+  // eslint-disable-next-line no-unused-vars
   createScene = (skyBox) => {
     const scene = new THREE.Scene();
-    // skyBox === null
-    //   ? scene.add(Tools.createSkyBox('models/texture', skyBox, 'jpg'))
-    //   : scene.background = new THREE.Color(0x337ab7);
-    scene.background = Tools.createCube('models/texture', skyBox, 'jpg');
+    skyBox === null
+      ? scene.background = Tools.createCubeSkybox('models/texture', skyBox, 'jpg')
+      : scene.background = new THREE.Color(0x337ab7);
+
     scene.fog = new THREE.Fog(0xeeeeee, -100, 1000);
     // 灯光
     const light = new THREE.PointLight(0xffffff, 1, 100);

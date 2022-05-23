@@ -284,6 +284,12 @@ export default class Tools {
     }
   }
 
+  /**
+   * @description 创建天空盒子
+   * @param  {} path
+   * @param  {} name
+   * @param  {} format
+   */
   static createSkyBox(path, name, format) {
     // ['px：right', 'nx：left', 'py：up', 'ny：dn', 'pz：back', 'nz：front', ]
     const direction = [
@@ -310,13 +316,17 @@ export default class Tools {
     }
     const mesh = new THREE.Mesh(skyGeometry, materialArray);
     mesh.name = 'skyBox';
-    console.log(mesh);
     // 创建一个完整的天空盒，填入几何模型和材质的参数
     return mesh;
   }
 
-  static createCube(path, name, format) {
-    // ['px：right', 'nx：left', 'py：up', 'ny：dn', 'pz：back', 'nz：front', ]
+  /**
+   * @description 创建cubeTesture 作为纹理
+   * @param  {String} path 文件夹路径
+   * @param  {String} name 文件名
+   * @param  {String} format 格式
+   */
+  static createCubeSkybox(path, name, format) {
     const direction = [
       `${path}/${name}/right.${format}`,
       `${path}/${name}/left.${format}`,

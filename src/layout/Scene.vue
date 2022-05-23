@@ -121,7 +121,7 @@ export default {
         // scene.remove(scene.getChildByName('skyBox'));
         // scene.add(Tools.createSkyBox('models/texture', newV, 'jpg'));
         // cube方式
-        scene.background = Tools.createCube('models/texture', newV, 'jpg');
+        scene.background = Tools.createCubeSkybox('models/texture', newV, 'jpg');
       }
     },
   },
