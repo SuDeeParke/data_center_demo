@@ -115,7 +115,7 @@
 
 <script>
 import { login, register } from '../api/user';
-import { encode } from '../utils/tools';
+import { encode } from '../utils/handler';
 
 export default {
   name: 'login',

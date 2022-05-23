@@ -29,6 +29,9 @@
           <label> 请选择颜色</label>
           <el-color-picker v-model="themeColor"></el-color-picker>
         </div>
+        <el-button plain type="info"
+        style="margin-top: 20px; width: 80%"
+        @click="resetThemeColor()">恢复默认</el-button>
       </InfoPanel>
       <InfoPanel title="用户">
         <div class="flex-wrap">
@@ -67,11 +70,14 @@ export default {
   },
   mounted() {
     this.dark = this.sharedState.dark;
-    const themeColor = document.documentElement.style.getPropertyValue('--theme-color');
-    console.log(themeColor);
-    if (themeColor) {
-      this.themeColor = themeColor;
-    }
+  },
+  methods: {
+    changeColor(newV) {
+      document.documentElement.style.setProperty('--theme-color', newV);
+    },
+    resetThemeColor() {
+      document.documentElement.style.removeProperty('--theme-color');
+    },
   },
   watch: {
     dark(newV) {
@@ -89,6 +95,9 @@ export default {
         this.sharedState.skyBox = newV;
         window.cookieStore.set('skyBox', newV);
       },
+    },
+    themeColor(newV) {
+      this.changeColor(newV);
     },
   },
 
@@ -114,6 +123,7 @@ export default {
   justify-content: space-around;
   align-items: center;
   margin-top: 10px;
+  margin-bottom: 10px;
   label{
     font-size: 1.6rem;
   }

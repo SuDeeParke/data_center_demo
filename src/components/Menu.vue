@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { showDeviceMark, hideDeviceMark } from '@/utils/tools';
+import { showDeviceMark, hideDeviceMark } from '@/utils/handler';
 
 export default {
   name: 'Menu',
