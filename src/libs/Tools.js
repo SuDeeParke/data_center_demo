@@ -49,13 +49,13 @@ export default class Tools {
       scene.traverse((child) => {
         const childTemp = child;
         if (childTemp instanceof THREE.Mesh) {
-          const objName = childTemp.name;
           // 接受阴影
           // eslint-disable-next-line no-param-reassign
           // child.castShadow = true;
           // eslint-disable-next-line no-param-reassign
           // child.receiveShadow = true;
           // 配置拾取
+          const objName = childTemp.name;
           // const pattern = /^Obj3d66/;
           if (/^JiGui/.test(objName)) {
             // childTemp.material = childTemp.material.clone();
@@ -304,6 +304,7 @@ export default class Tools {
         new THREE.MeshBasicMaterial({
           map: loader.load(direction[i]), // 将图片纹理贴上
           side: THREE.BackSide, // 镜像翻转
+          fog: false,
         }),
       );
     }

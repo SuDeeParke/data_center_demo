@@ -26,7 +26,7 @@ export default class Basic {
 
   init(domID, skyBox) {
     return new Promise((resolve) => {
-      this.scene = this.initScene(skyBox);
+      this.scene = this.createScene(skyBox);
       this.cameraPackge = new BasicCamera();
       this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.camera);
       document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
@@ -37,12 +37,13 @@ export default class Basic {
     });
   }
 
-  initScene = (skyBox) => {
+  createScene = (skyBox) => {
     const scene = new THREE.Scene();
     skyBox === null
       ? scene.add(Tools.createSkyBox('models/texture', skyBox, 'jpg'))
       : scene.background = new THREE.Color(0x337ab7);
 
+    scene.fog = new THREE.Fog(0xeeeeee, -100, 1000);
     // 灯光
     const light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(20, 20, 20);
