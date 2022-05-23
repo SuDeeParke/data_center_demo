@@ -36,12 +36,14 @@ export default {
   border-bottom: 2px solid var(--theme-color);
   transition: all .4s;
   user-select: none;
+  font-family: "Helvetica Neue",
+  Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   a {
     display: inline-block;
     text-decoration: none;
     color: var(--font-color);
     font-size: 23px;
-    font-family: 'sans-serif';
+    font-family:  inherit;
     cursor: pointer;
     transition: all 0.3s;
     &:hover{

@@ -25,7 +25,10 @@
         </el-select>
       </InfoPanel>
       <InfoPanel title="主题色">
-
+        <div class="flex-wrap">
+          <label> 请选择颜色</label>
+          <el-color-picker v-model="themeColor"></el-color-picker>
+        </div>
       </InfoPanel>
       <InfoPanel title="用户">
         <div class="flex-wrap">
@@ -45,6 +48,7 @@ export default {
   data() {
     return {
       dark: false,
+      themeColor: '#337ab7',
       options: [{
         value: 'bak4',
         label: '纯净',
@@ -63,6 +67,11 @@ export default {
   },
   mounted() {
     this.dark = this.sharedState.dark;
+    const themeColor = document.documentElement.style.getPropertyValue('--theme-color');
+    console.log(themeColor);
+    if (themeColor) {
+      this.themeColor = themeColor;
+    }
   },
   watch: {
     dark(newV) {

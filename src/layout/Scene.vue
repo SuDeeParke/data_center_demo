@@ -22,7 +22,7 @@ export default {
     DataCenter.cabints = [];
     DataCenter.airs = [];
 
-    DataCenter.init('scene', this.sharedState.skyBox).then(() => {
+    DataCenter.init('scene', null).then(() => {
       if (process.env.VUE_APP_DEV === 'true') {
         DataCenter.addModle('models/data_center_empty/JiFang.gltf', 'gltf');
         DataCenter.refcAddModle('models/aircondition/scene.gltf', {
@@ -108,14 +108,11 @@ export default {
     window.DataCenter = DataCenter;
   },
   methods: {
-    init() {
-      window.cookieStore.get('skyBox')
-        .then((res) => {
-          if (res) {
-            this.skyBox = res.value;
-            this.sharedState.skyBox = res.value;
-          }
-        });
+    async init() {
+      const res = await window.cookieStore.get('skyBox');
+      if (res) {
+        this.sharedState.skyBox = res.value;
+      }
     },
     changeSkyBox(newV) {
       if (window.DataCenter) {
@@ -128,7 +125,10 @@ export default {
   watch: {
     'sharedState.skyBox': {
       handler(newV) {
+        // eslint-disable-next-line no-debugger
+        // debugger;
         this.changeSkyBox(newV);
+        return newV;
       },
       immediate: true,
     },

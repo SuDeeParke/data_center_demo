@@ -39,8 +39,10 @@ export default class Basic {
 
   initScene = (skyBox) => {
     const scene = new THREE.Scene();
-    // scene.background = new THREE.Color(0x155461);
-    scene.add(Tools.createSkyBox('models/texture', skyBox, 'jpg'));
+    skyBox === null
+      ? scene.add(Tools.createSkyBox('models/texture', skyBox, 'jpg'))
+      : scene.background = new THREE.Color(0x337ab7);
+
     // 灯光
     const light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(20, 20, 20);

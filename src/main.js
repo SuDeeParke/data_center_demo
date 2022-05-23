@@ -12,6 +12,7 @@ import {
   Input,
   Select,
   Option,
+  ColorPicker,
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/styles/iconfont.css';
@@ -32,6 +33,7 @@ Vue.use(Slider);
 Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Input);
+Vue.use(ColorPicker);
 Vue.use(VueAxios, axios);
 
 new Vue({
