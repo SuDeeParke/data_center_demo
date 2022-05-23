@@ -35,6 +35,7 @@ export default {
   backdrop-filter: blur(10px);
   border-bottom: 2px solid var(--theme-color);
   transition: all .4s;
+  user-select: none;
   a {
     display: inline-block;
     text-decoration: none;

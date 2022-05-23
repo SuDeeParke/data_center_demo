@@ -15,7 +15,7 @@
         </div>
       </InfoPanel>
       <InfoPanel title="天空盒子">
-        <el-select v-model="skyBox" placeholder="请选择">
+        <el-select v-model="sharedState.skyBox" placeholder="请选择">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -58,7 +58,6 @@ export default {
         value: 'bak7',
         label: '默认',
       }],
-      skyBox: 'bak7',
       sharedState: this.$store.state,
     };
   },
@@ -76,9 +75,11 @@ export default {
         document.documentElement.classList.add('light');
       }
     },
-    skyBox(newV) {
-      this.sharedState.skyBox = newV;
-      window.cookieStore.set('skyBox', newV);
+    'sharedState.skyBox': {
+      handler(newV) {
+        this.sharedState.skyBox = newV;
+        window.cookieStore.set('skyBox', newV);
+      },
     },
   },
 

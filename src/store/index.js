@@ -16,6 +16,7 @@ const store = {
       console.log(newValue);
       this.state.acctivePanel = newValue;
     }
+    console.log(newValue);
   },
   clearMessageAction() {
     if (this.debug) {

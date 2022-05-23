@@ -16,6 +16,7 @@ export default {
     };
   },
   mounted() {
+    this.init();
     const DataCenter = new Basic();
     DataCenter.lights = [];
     DataCenter.cabints = [];
@@ -107,6 +108,15 @@ export default {
     window.DataCenter = DataCenter;
   },
   methods: {
+    init() {
+      window.cookieStore.get('skyBox')
+        .then((res) => {
+          if (res) {
+            this.skyBox = res.value;
+            this.sharedState.skyBox = res.value;
+          }
+        });
+    },
     changeSkyBox(newV) {
       if (window.DataCenter) {
         const { scene } = window.DataCenter;
