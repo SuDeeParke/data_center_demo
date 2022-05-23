@@ -39,10 +39,10 @@ export default class Basic {
 
   createScene = (skyBox) => {
     const scene = new THREE.Scene();
-    skyBox === null
-      ? scene.add(Tools.createSkyBox('models/texture', skyBox, 'jpg'))
-      : scene.background = new THREE.Color(0x337ab7);
-
+    // skyBox === null
+    //   ? scene.add(Tools.createSkyBox('models/texture', skyBox, 'jpg'))
+    //   : scene.background = new THREE.Color(0x337ab7);
+    scene.background = Tools.createCube('models/texture', skyBox, 'jpg');
     scene.fog = new THREE.Fog(0xeeeeee, -100, 1000);
     // 灯光
     const light = new THREE.PointLight(0xffffff, 1, 100);
@@ -114,7 +114,7 @@ export default class Basic {
 
   handlePick() {
     const curObj = this.selectedObject.object;
-    console.log(this.selectedObject.object);
+    // console.log(this.selectedObject.object);
     if (this.beforeSelObj) {
       // 恢复原来的颜色
       Tools.queryObject(this.beforeSelObj.uuid).forEach((element) => {

@@ -117,8 +117,11 @@ export default {
     changeSkyBox(newV) {
       if (window.DataCenter) {
         const { scene } = window.DataCenter;
-        scene.remove(scene.getChildByName('skyBox'));
-        scene.add(Tools.createSkyBox('models/texture', newV, 'jpg'));
+        // 盒子方式
+        // scene.remove(scene.getChildByName('skyBox'));
+        // scene.add(Tools.createSkyBox('models/texture', newV, 'jpg'));
+        // cube方式
+        scene.background = Tools.createCube('models/texture', newV, 'jpg');
       }
     },
   },
