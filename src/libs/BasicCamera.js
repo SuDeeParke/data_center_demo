@@ -32,7 +32,7 @@ export default class BasicCamera {
 
   cameraFlyTo = (control, point) => {
     const controlTemp = control;
-    const cloneCamera = this.camera.clone();
+    // const cloneCamera = this.camera.clone();
     // this.camera.lookAt(point);
     // eslint-disable-next-line no-param-reassign
     control.target = new Vector3(point.x, point.y, point.z);
@@ -42,18 +42,12 @@ export default class BasicCamera {
         x: point.x,
         y: point.y,
         z: point.z,
-        rx: cloneCamera.rotation.x,
-        ry: cloneCamera.rotation.y,
-        rz: cloneCamera.rotation.z,
       })
       .easing(TWEEN.Easing.Quadratic.Out)
       .onUpdate((v) => {
         this.camera.position.x = v.x;
         this.camera.position.y = v.y;
         this.camera.position.z = v.z;
-        this.camera.rotation.x = v.rx;
-        this.camera.rotation.y = v.ry;
-        this.camera.rotation.z = v.rz;
       }, 1000)
       .onComplete(() => {
         controlTemp && (controlTemp.enabled = true);

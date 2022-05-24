@@ -40,7 +40,7 @@ export default class Basic {
   // eslint-disable-next-line no-unused-vars
   createScene = (skyBox) => {
     const scene = new THREE.Scene();
-    skyBox === null
+    skyBox !== null
       ? scene.background = Tools.createCubeSkybox('models/texture', skyBox, 'jpg')
       : scene.background = new THREE.Color(0x337ab7);
 
