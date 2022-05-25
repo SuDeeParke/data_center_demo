@@ -16,13 +16,20 @@ export default {
       const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
       const cube = new THREE.Mesh(geometry, material);
       const geometry2 = new THREE.BoxGeometry();
-      const material2 = new THREE.MeshBasicMaterial({ color: 0x000ff });
+      const material2 = new THREE.MeshBasicMaterial({ color: 0xff00ff });
       const cube2 = new THREE.Mesh(geometry2, material2);
+      const geometry3 = new THREE.BoxGeometry();
+      const material3 = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+      const cube3 = new THREE.Mesh(geometry3, material3);
       cube.userData.pickble = true;
       cube2.userData.pickble = true;
+      cube3.userData.pickble = true;
+
       cube2.position.set(5, 5, 5);
+      cube3.position.set(-5, -5, -5);
       scene.add(cube);
       scene.add(cube2);
+      scene.add(cube3);
       const axes = new THREE.AxisHelper(10);
       scene.add(axes);
     });

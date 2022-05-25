@@ -35,23 +35,19 @@ export default class BasicCamera {
     const camera = control.object;
     const copyRotation = camera.rotation.clone();
     control.target = point;
-    console.log("================1=================");
-    console.log(camera.position, camera.rotation);
     // eslint-disable-next-line no-param-reassign
     control && (control.enabled = false);
     new TWEEN.Tween(camera.position)
-      .to(
-        point
-      )
+      .to(new Vector3(point.x + 1, point.y + 1, point.z + 1))
       .easing(TWEEN.Easing.Quadratic.Out)
       .onUpdate((v) => {
         camera.position.set(v.x, v.y, v.z);
-      }, 1000)
+      }, 3000)
       .onComplete(() => {
         // eslint-disable-next-line no-param-reassign
         control && (control.enabled = true);
-        console.log("================2=================");
-        console.log(camera.position, camera.rotation);
+        // control.autoRotate = true;
+        control.update()
       })
       .start();
     Tools.animate();
