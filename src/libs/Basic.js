@@ -11,7 +11,7 @@ export default class Basic {
     this.scene = null;
     this.cameraPackge = null;
     this.rendererPackge = null;
-    this.controls = null;
+    this.control = null;
     this.raycaster = null;
     this.pointer = null;
     this.selectedObjects = [];
@@ -30,7 +30,7 @@ export default class Basic {
       this.cameraPackge = new BasicCamera();
       this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.camera);
       document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
-      this.controls = this.createControls();
+      this.control = this.createControls();
       this.addPicker();
       process.env.VUE_APP_DEV === 'true' ? this.createState() : null;
       resolve(this);
@@ -61,21 +61,21 @@ export default class Basic {
     const { renderer } = this.rendererPackge;
     const { camera } = this.cameraPackge;
     if (camera && renderer) {
-      const controls = new OrbitControls(camera, renderer.domElement);
-      controls.listenToKeyEvents(window);
+      const control = new OrbitControls(camera, renderer.domElement);
+      control.listenToKeyEvents(window);
       // 设置滑动惯性
-      controls.enableDamping = true;
-      controls.dampingFactor = 0.05;
+      control.enableDamping = true;
+      control.dampingFactor = 0.05;
       // 配置是否能够zoom
-      controls.enableZoom = true;
+      control.enableZoom = true;
       // 配置最远和最近距离
-      controls.minDistance = 5;
-      controls.maxDistance = 100;
+      control.minDistance = 5;
+      control.maxDistance = 100;
       // 定义当平移的时候摄像机的位置将如何移动
-      controls.screenSpacePanning = false;
+      control.screenSpacePanning = false;
       // 垂直旋转的角度的上限
-      // controls.maxPolarAngle = Math.PI / 2;
-      return controls;
+      // control.maxPolarAngle = Math.PI / 2;
+      return control;
     }
     return null;
   }
@@ -102,6 +102,10 @@ export default class Basic {
     this.pointer = new THREE.Vector2();
   }
 
+  /**
+   * @description 利用鼠标屏幕桌标转换成三维pointer坐标点
+   * @param  {} event 事件对象
+   */
   updatePointer(event) {
     // 将鼠标位置归一化为设备坐标。x 和 y 方向的取值范围是 (-1 to +1)
     this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -113,6 +117,9 @@ export default class Basic {
     this.selectedObjects.push(object);
   }
 
+  /**
+   * @description 处理物体拾取
+   */
   handlePick() {
     const curObj = this.selectedObject.object;
     // console.log(this.selectedObject.object);
@@ -125,10 +132,10 @@ export default class Basic {
     }
     if (curObj && curObj.userData.pickble) {
       if (this.beforeSelObj && this.beforeSelObj.uuid !== curObj.uuid) {
-        const { x, y, z } = this.selectedObject.point;
-        console.log(this.selectedObject.point);
-        const point = { x: x + 3, y: y + 3, z: z + 3 };
-        this.cameraPackge.cameraFlyTo(this.controls, point);
+        console.log(this.selectedObject);
+        // const { x, y, z } = this.selectedObject.point;
+        // const point = { x: x + 3, y: y + 3, z: z + 3 };
+        this.cameraPackge.cameraFlyTo(this.control, this.selectedObject.point);
       }
       // 克隆当前的颜色
       this.beforeSelObj = {
@@ -151,7 +158,7 @@ export default class Basic {
       [this.selectedObject] = intersects;
       // 先取消hover的目标
       // Tools.hideBoxHelper(this.selectedObjects[0]);
-      Tools.hidePanel(this.selectedObjects[0]);
+      // Tools.hidePanel(this.selectedObjects[0]);
       // 再替换
       if (!(this.selectedObjects[0] instanceof THREE.BoxHelper)) {
         this.addSelectedObject(this.selectedObject.object);
@@ -162,7 +169,7 @@ export default class Basic {
           outlinePass.selectedObjects = this.selectedObjects;
         }
         // Tools.showBoxHelper(this.selectedObject.object);
-        Tools.showPanel(this.selectedObject.object, this.scene);
+        // Tools.showPanel(this.selectedObjecontrolsct.object, this.scene);
       }
     }
   }
@@ -178,11 +185,11 @@ export default class Basic {
   render = () => {
     const { activeRenderer, renderer } = this.rendererPackge;
     const { camera } = this.cameraPackge;
-    const { scene, controls, state } = this;
+    const { scene, control, state } = this;
     if (renderer && activeRenderer) {
       renderer.setAnimationLoop(() => {
         state && state.begin();
-        controls.update();
+        control.update();
         renderer.render(scene, camera);
         state && state.end();
       });

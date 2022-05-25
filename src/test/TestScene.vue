@@ -15,8 +15,16 @@ export default {
       const geometry = new THREE.BoxGeometry();
       const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
       const cube = new THREE.Mesh(geometry, material);
+      const geometry2 = new THREE.BoxGeometry();
+      const material2 = new THREE.MeshBasicMaterial({ color: 0x000ff });
+      const cube2 = new THREE.Mesh(geometry2, material2);
       cube.userData.pickble = true;
+      cube2.userData.pickble = true;
+      cube2.position.set(5, 5, 5);
       scene.add(cube);
+      scene.add(cube2);
+      const axes = new THREE.AxisHelper(10);
+      scene.add(axes);
     });
 
     TestScene.render();
