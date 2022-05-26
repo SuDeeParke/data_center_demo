@@ -19,11 +19,6 @@ export default {
     };
   },
   components: { Scene, Interface, TestScene },
-  mounted() {
-    if (process.env.VUE_APP_TEST === 'true') {
-      this.test = true;
-    }
-  },
 };
 </script>
 ,
