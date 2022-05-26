@@ -49,11 +49,10 @@ export default class Tools {
       scene.traverse((child) => {
         const childTemp = child;
         if (childTemp instanceof THREE.Mesh) {
-          // 接受阴影
-          // eslint-disable-next-line no-param-reassign
-          // child.castShadow = true;
-          // eslint-disable-next-line no-param-reassign
-          // child.receiveShadow = true;
+          if (child.name !== 'floor') {
+            childTemp.castShadow = true;
+          }
+          childTemp.receiveShadow = true;
           // 配置拾取
           const objName = childTemp.name;
           // const pattern = /^Obj3d66/;
@@ -96,6 +95,7 @@ export default class Tools {
       scene.traverse((child) => {
         const childTemp = child;
         if (childTemp instanceof THREE.Mesh) {
+          childTemp.castShadow = true;
           if (pickable) {
             childTemp.material = childTemp.material.clone();
             childTemp.userData.pickble = true;

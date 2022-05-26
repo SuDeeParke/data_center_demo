@@ -24,11 +24,11 @@ export default class Basic {
     process.env.VUE_APP_DEV === 'true' ? window.THREE = THREE : null;
   }
 
-  init(domID, skyBox) {
+  init(domID, params) {
     return new Promise((resolve) => {
-      this.scene = this.createScene(skyBox);
+      this.scene = this.createScene(params.skyBox);
       this.cameraPackge = new BasicCamera();
-      this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.camera);
+      this.rendererPackge = new BasicRender(this.scene, this.cameraPackge.camera, params.shadow);
       document.getElementById(domID).appendChild(this.rendererPackge.renderer.domElement);
       this.control = this.createControls();
       this.addPicker();
@@ -47,12 +47,22 @@ export default class Basic {
     scene.fog = new THREE.Fog(0xeeeeee, -100, 1000);
     // 灯光
     const light = new THREE.PointLight(0xffffff, 1, 100);
-    light.position.set(20, 20, 20);
+    light.position.set(20, 60, 20);
+    light.castShadow = true;
     scene.add(light);
     const ambientLight = new THREE.AmbientLight(0xeeeeee);
     ambientLight.position.set(0, 0, 20);
     scene.add(ambientLight);
 
+    // 平面
+    const planeGeometry = new THREE.PlaneGeometry(100, 100);
+    const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc });
+    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    plane.rotation.x = -0.5 * Math.PI;
+    plane.position.y = -0.02;
+    // 设置平面需要接收阴影
+    plane.receiveShadow = true;
+    scene.add(plane);
     process.env.VUE_APP_DEV === 'true' ? console.log('测试模式场景初始化完成！') : console.log('欢迎来到数据中心可视化系统！');
     return scene;
   }
@@ -164,10 +174,8 @@ export default class Basic {
         this.addSelectedObject(this.selectedObject.object);
       }
       if (this.selectedObject.object.userData.pickble) {
-        if (this.selectedObject.object.userData.pickble) {
-          const { outlinePass } = this.rendererPackge;
-          outlinePass.selectedObjects = this.selectedObjects;
-        }
+        const { outlinePass } = this.rendererPackge;
+        outlinePass.selectedObjects = this.selectedObjects;
         // Tools.showBoxHelper(this.selectedObject.object);
         // Tools.showPanel(this.selectedObjecontrolsct.object, this.scene);
       }

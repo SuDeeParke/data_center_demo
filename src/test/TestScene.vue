@@ -21,17 +21,33 @@ export default {
       const geometry3 = new THREE.BoxGeometry();
       const material3 = new THREE.MeshBasicMaterial({ color: 0x0000ff });
       const cube3 = new THREE.Mesh(geometry3, material3);
+
       cube.userData.pickble = true;
       cube2.userData.pickble = true;
       cube3.userData.pickble = true;
 
       cube2.position.set(5, 5, 5);
       cube3.position.set(-5, -5, -5);
+
+      cube.castShadow = true;
+      cube2.castShadow = true;
+      cube3.castShadow = true;
+
       scene.add(cube);
       scene.add(cube2);
       scene.add(cube3);
+
       const axes = new THREE.AxisHelper(10);
       scene.add(axes);
+      // 平面
+      const planeGeometry = new THREE.PlaneGeometry(100, 100);
+      const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc });
+      const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+      plane.rotation.x = -0.5 * Math.PI;
+      plane.position.y = -0;
+      // 设置平面需要接收阴影
+      plane.receiveShadow = true;
+      scene.add(plane);
     });
 
     TestScene.render();

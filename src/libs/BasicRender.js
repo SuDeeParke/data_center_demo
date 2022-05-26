@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import * as THREE from 'three';
 import { EffectComposer } from '@/assets/js/postprocessing/EffectComposer';
 import { RenderPass } from '@/assets/js/postprocessing/RenderPass';
@@ -6,29 +7,26 @@ import { ShaderPass } from '@/assets/js/postprocessing/ShaderPass';
 import { FXAAShader } from '@/assets/js/postprocessing/FXAAShader';
 
 export default class BasicRender {
-  constructor(scene, camera) {
+  constructor(scene, camera, shadow) {
     this.renderer = null;
     this.composer = null;
     this.activeRenderer = null;
     this.outlinePass = null;
     this.effectFXAA = null;
     this.outlinePass = this.addOutlineEffect(scene, camera);
-    this.renderer = this.createRender();
+    this.renderer = this.createRender(shadow);
     this.composer = this.createComposer(scene, camera);
   }
 
-  createRender = () => {
+  createRender = (shadow) => {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = shadow;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.outputEncoding = THREE.BasicDepthPacking;
     this.activeRenderer = renderer;
     return renderer;
-  }
-
-  addShadow() {
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   }
 
   createComposer(scene, camera) {

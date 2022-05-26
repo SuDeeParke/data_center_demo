@@ -14,6 +14,16 @@
           </el-switch>
         </div>
       </InfoPanel>
+      <InfoPanel title="阴影模式">
+        <div class="flex-wrap">
+          <label>{{sharedState.shadow?'开启':'关闭'}}</label>
+          <el-switch
+            v-model="sharedState.shadow"
+            active-color="#13ce66"
+            inactive-color="#ccc">
+          </el-switch>
+        </div>
+      </InfoPanel>
       <InfoPanel title="天空盒子">
         <el-select v-model="sharedState.skyBox" placeholder="请选择">
           <el-option
@@ -44,6 +54,7 @@
 </template>
 
 <script>
+import { shadowMode } from '../../utils/handler';
 import InfoPanel from '../InfoPanel.vue';
 
 export default {
@@ -51,6 +62,7 @@ export default {
   data() {
     return {
       dark: false,
+      shadow: false,
       themeColor: '#337ab7',
       options: [{
         value: 'bak4',
@@ -94,6 +106,12 @@ export default {
       handler(newV) {
         this.sharedState.skyBox = newV;
         window.cookieStore.set('skyBox', newV);
+      },
+    },
+    'sharedState.shadow': {
+      handler(newV) {
+        this.sharedState.shadow = newV;
+        shadowMode(newV);
       },
     },
     themeColor(newV) {

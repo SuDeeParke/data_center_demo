@@ -27,3 +27,14 @@ export const hideDeviceMark = () => {
     }
   });
 };
+
+export const shadowMode = (isOpen) => {
+  const { rendererPackge } = window.DataCenter;
+  if (rendererPackge) {
+    if (isOpen) {
+      rendererPackge.renderer.shadowMap.enabled = true;
+    } else {
+      rendererPackge.renderer.shadowMap.enabled = false;
+    }
+  }
+};
