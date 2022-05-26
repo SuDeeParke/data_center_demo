@@ -21,8 +21,8 @@ export default {
     DataCenter.lights = [];
     DataCenter.cabints = [];
     DataCenter.airs = [];
-
-    DataCenter.init('scene', null).then(() => {
+    console.log(this.sharedState.skyBox);
+    DataCenter.init('scene', this.skyBox).then(() => {
       if (process.env.VUE_APP_DEV === 'true') {
         DataCenter.addModle('models/data_center_empty/JiFang.gltf', 'gltf');
         DataCenter.refcAddModle('models/aircondition/scene.gltf', {

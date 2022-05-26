@@ -35,6 +35,7 @@ export default class BasicCamera {
     const camera = control.object;
     const copyRotation = camera.rotation.clone();
     control.target = point;
+    camera.rotation.order = 'XYZ'
     // eslint-disable-next-line no-param-reassign
     control && (control.enabled = false);
     new TWEEN.Tween(camera.position)

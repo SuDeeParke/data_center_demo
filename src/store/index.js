@@ -4,7 +4,7 @@ const store = {
     message: 'Hello!',
     acctivePanel: 'Default',
     dark: false,
-    skyBox: 'null',
+    skyBox: 'bak7',
   },
   setMessageAction(newValue) {
     if (this.debug) {
