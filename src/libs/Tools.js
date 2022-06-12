@@ -28,7 +28,7 @@ export default class Tools {
   }
 
   /**
-   * @description 加载GLTF模型
+   * @description 加载GLTF模型——场景
    * @param  {Object3D} scene
    * @param  {String} addr
    */
@@ -72,6 +72,11 @@ export default class Tools {
     });
   })
 
+  /**
+   * @description 重构的加载GLTF方法——加载物体
+   * @param  {} addr
+   * @param  {} option
+   */
   static refcLoadGltfModle = (addr, option) => new Promise((resolve, reject) => {
     const { pickable, scale, arr } = option;
     const loader = new GLTFLoader();
@@ -94,6 +99,7 @@ export default class Tools {
       // 加工处理 pickable
       scene.traverse((child) => {
         const childTemp = child;
+        console.log(childTemp);
         if (childTemp instanceof THREE.Mesh) {
           childTemp.castShadow = true;
           if (pickable) {
